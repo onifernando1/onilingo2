@@ -11,6 +11,9 @@ var usersRouter = require("./routes/users");
 const wordsRouter = require("./routes/words");
 const lessonsRouter = require("./routes/lessons");
 
+const Lesson = db.Lesson;
+const Word = db.Word;
+
 var app = express();
 
 db.sequelize

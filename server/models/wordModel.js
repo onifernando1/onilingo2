@@ -1,7 +1,7 @@
 const { v4: uuidv4 } = require("uuid");
 
 module.exports = (sequelize, DataTypes) => {
-  const Word = sequelize.define("Word", {
+  const Word = sequelize.define("Words", {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -45,8 +45,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
     },
     LessonId: {
-      type: DataTypes.INTEGER,
-      references: { model: "Lesson", key: "id" },
+      type: DataTypes.UUID,
+      references: { model: "Lessons", key: "id" },
     },
   });
 
