@@ -66,7 +66,7 @@ exports.update = (req, res) => {};
 //Delete
 
 exports.delete = (req, res) => {
-  const id = req.param.id;
+  const id = req.params.id;
 
   Word.destroy({
     where: { id: id },
