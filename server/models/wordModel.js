@@ -42,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
     },
     sound: {
-      type: DataTypes.SOUND,
+      type: DataTypes.STRING,
     },
   });
   return Word;
