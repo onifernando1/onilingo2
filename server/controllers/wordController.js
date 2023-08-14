@@ -65,7 +65,23 @@ exports.update = (req, res) => {};
 
 //Delete
 
-exports.delete = (req, res) => {};
+exports.delete = (req, res) => {
+  const id = req.param.id;
+
+  Word.destroy({
+    where: { id: id },
+  })
+    .then((num) => {
+      if (num == 1) {
+        res.send({ message: "Word deleted" });
+      } else {
+        res.send(`Cannot delete tutorial id${id}`);
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({ message: `Cannot delete tutorial id${id}` });
+    });
+};
 
 //Delete All
 
