@@ -5,7 +5,8 @@ const Lesson = db.lessons;
 
 exports.create = (req, res) => {
   const lesson = {
-    english: req.body.english,
+    name: req.body.name,
+    number: req.body.number,
   };
 
   Lesson.create(lesson)

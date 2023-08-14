@@ -1,7 +1,7 @@
 const { v4: uuidv4 } = require("uuid");
 
 module.exports = (sequelize, DataTypes) => {
-  const Word = sequelize.define("word", {
+  const Word = sequelize.define("Word", {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -46,6 +46,9 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  Word.belongsTo(models.User, { as: "Lesson", foreignKey: "LessonId" });
+  Word.associate = function (models) {
+    Word.belongsTo(models.User, { as: "Lesson", foreignKey: "LessonId" });
+  };
+
   return Word;
 };

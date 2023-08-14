@@ -1,7 +1,7 @@
 const { v4: uuidv4 } = require("uuid");
 
 module.exports = (sequelize, DataTypes) => {
-  const Lesson = sequelize.define("lesson", {
+  const Lesson = sequelize.define("Lesson", {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Lesson.associate = function (models) {
-    Lesson.has_many(models.Word, { as: "Words", foreignKey: "LessonId" });
+    Lesson.hasMany(models.Word, { as: "Words", foreignKey: "LessonId" });
   };
 
   return Lesson;
