@@ -1,4 +1,5 @@
-const Sequelize = require("sequelize");
+const { Sequelize, DataTypes } = require("sequelize");
+
 require("dotenv").config();
 
 const sequelize = new Sequelize(
@@ -17,5 +18,7 @@ const db = {};
 
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
+
+db.words = require("./wordModel.js")(sequelize, DataTypes);
 
 module.exports = db;
