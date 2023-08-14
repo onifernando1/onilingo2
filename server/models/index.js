@@ -20,5 +20,6 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.words = require("./wordModel.js")(sequelize, DataTypes);
+db.lessons = require("./lessonModel.js")(sequelize, DataTypes);
 
 module.exports = db;

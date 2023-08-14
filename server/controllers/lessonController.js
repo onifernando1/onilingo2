@@ -1,25 +1,14 @@
 const db = require("../models");
-const Word = db.words;
+const Lesson = db.lessons;
 
 //Create
 
 exports.create = (req, res) => {
-  const word = {
+  const lesson = {
     english: req.body.english,
-    portuguese: req.body.portuguese,
-    lastStudied: req.body.lastStudied,
-    toBeStudiedDate: req.body.toBeStudiedDate,
-    timesSeen: 0,
-    timesWrong: 0,
-    status: "initial",
-    percentage: 0,
-    lastFiveArray: [],
-    lastFivePercentage: 0,
-    image: req.body.image,
-    sound: req.body.sound,
   };
 
-  Word.create(word)
+  Lesson.create(lesson)
     .then((data) => {
       res.send(data);
     })
@@ -31,7 +20,7 @@ exports.create = (req, res) => {
 //Find All
 
 exports.findAll = (req, res) => {
-  Word.findAll()
+  Lesson.findAll()
     .then((data) => {
       res.send(data);
     })
@@ -43,18 +32,18 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
   const id = req.params.id;
 
-  Word.findByPk(id)
+  Lesson.findByPk(id)
     .then((data) => {
       if (data) {
         res.send(data);
       } else
         res.status(404).send({
-          message: `Cannot find Word with id${id}`,
+          message: `Cannot find Lesson with id${id}`,
         });
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Error retrieving Word with id=" + id,
+        message: "Error retrieving Lesson with id=" + id,
       });
     });
 };
@@ -68,18 +57,18 @@ exports.update = (req, res) => {};
 exports.delete = (req, res) => {
   const id = req.params.id;
 
-  Word.destroy({
+  Lesson.destroy({
     where: { id: id },
   })
     .then((num) => {
       if (num == 1) {
-        res.send({ message: "Word deleted" });
+        res.send({ message: "Lesson deleted" });
       } else {
-        res.send(`Cannot delete Word id${id}`);
+        res.send(`Cannot delete Lesson id${id}`);
       }
     })
     .catch((err) => {
-      res.status(500).send({ message: `Cannot delete Word id${id}` });
+      res.status(500).send({ message: `Cannot delete Lesson id${id}` });
     });
 };
 
