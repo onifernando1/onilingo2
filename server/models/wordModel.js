@@ -45,5 +45,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
     },
   });
+
+  Word.belongsTo(models.User, { as: "Lesson", foreignKey: "LessonId" });
   return Word;
 };
