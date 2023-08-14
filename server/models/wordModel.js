@@ -44,10 +44,14 @@ module.exports = (sequelize, DataTypes) => {
     sound: {
       type: DataTypes.STRING,
     },
+    LessonId: {
+      type: DataTypes.INTEGER,
+      references: { model: "Lesson", key: "id" },
+    },
   });
 
   Word.associate = function (models) {
-    Word.belongsTo(models.User, { as: "Lesson", foreignKey: "LessonId" });
+    Word.belongsTo(models.Lesson, { as: "Lesson", foreignKey: "LessonId" });
   };
 
   return Word;

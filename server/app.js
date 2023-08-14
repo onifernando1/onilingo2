@@ -53,4 +53,11 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 
+const createWordAndLesson = async () => {
+  const word = await db.Word.create({
+    english: "hello",
+  });
+  const lesson = await db.Lesson.create({ name: "1" });
+};
+
 module.exports = app;
