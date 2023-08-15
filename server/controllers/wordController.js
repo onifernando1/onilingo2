@@ -18,8 +18,6 @@ exports.create = (req, res) => {
     sound,
   } = req.body;
 
-  console.log(`ENGLISH:${req.body}`);
-
   pool.query(
     "INSERT INTO words (english,portuguese,last_studied_date,to_be_studied_date,times_seen,times_wrong,status,percentage,last_five_array,last_five_percentage,image,sound) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)",
     [

@@ -1,31 +1,33 @@
-const db = require("../models");
-const Lesson = db.lessons;
+const pool = require("../queries");
 
 //Create
 
 exports.create = (req, res) => {
-  const lesson = {
-    name: req.body.name,
-    number: req.body.number,
-  };
+  const { name, number } = req.body;
 
-  Lesson.create(lesson)
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((err) => {
-      res.status(500).send({ message: err.message });
-    });
+  pool.query(
+    "INSERT INTO lessons (name,number) VALUES ($1,$2)",
+    [name, number],
+
+    (error, results) => {
+      if (error) {
+        throw error;
+      } else {
+        res.status(201).send(`Lesson Added`);
+      }
+    }
+  );
 };
 
 //Find All
 
 exports.findAll = (req, res) => {
-  Lesson.findAll()
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((err) => res.status(500).send({ message: err.message }));
+  pool.query("SELECT * FROM lessons ORDER BY id ASC", (error, results) => {
+    if (error) {
+      throw error;
+    }
+    res.status(200).json(results.rows);
+  });
 };
 
 //Find One
@@ -33,44 +35,47 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
   const id = req.params.id;
 
-  Lesson.findByPk(id)
-    .then((data) => {
-      if (data) {
-        res.send(data);
-      } else
-        res.status(404).send({
-          message: `Cannot find Lesson with id${id}`,
-        });
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: "Error retrieving Lesson with id=" + id,
-      });
-    });
+  pool.query("SELECT * FROM lessons WHERE id=$1", [id], (error, results) => {
+    if (error) {
+      throw error;
+    } else {
+      res.status(200).json(results.rows);
+    }
+  });
 };
 
 //Update
 
-exports.update = (req, res) => {};
+exports.update = (req, res) => {
+  const id = req.params.id;
+
+  const { name, number } = req.body;
+
+  pool.query(
+    "UPDATE lessons SET name =$1 ,number = $2 WHERE id=$3",
+    [name, number, id],
+    (error, results) => {
+      if (error) {
+        throw error;
+      } else {
+        res.status(200).send(`Lesson updated id: ${id}`);
+      }
+    }
+  );
+};
 
 //Delete
 
 exports.delete = (req, res) => {
   const id = req.params.id;
 
-  Lesson.destroy({
-    where: { id: id },
-  })
-    .then((num) => {
-      if (num == 1) {
-        res.send({ message: "Lesson deleted" });
-      } else {
-        res.send(`Cannot delete Lesson id${id}`);
-      }
-    })
-    .catch((err) => {
-      res.status(500).send({ message: `Cannot delete Lesson id${id}` });
-    });
+  pool.query("DELETE FROM lessons WHERE id=$1", [id], (error, results) => {
+    if (error) {
+      throw error;
+    } else {
+      res.status(200).send(`Lesson deleted ${id}`);
+    }
+  });
 };
 
 //Delete All
