@@ -30,7 +30,7 @@ exports.findAll = (req, res) => {
   });
 };
 
-//Find One
+//Find One + Find words in lesson
 
 exports.findOne = (req, res) => {
   const id = req.params.id;
@@ -42,6 +42,19 @@ exports.findOne = (req, res) => {
       res.status(200).json(results.rows);
     }
   });
+
+  //Find words in lesson
+
+  pool.query(
+    "SELECT * FROM words WHERE lessonId=$1",
+    [id],
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      res.status(200).json({ words: results.rows });
+    }
+  );
 };
 
 //Update

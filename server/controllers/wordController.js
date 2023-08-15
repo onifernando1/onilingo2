@@ -17,10 +17,11 @@ exports.create = (req, res) => {
     lastFivePercentage,
     image,
     sound,
+    lessonId,
   } = req.body;
 
   pool.query(
-    "INSERT INTO words (english,portuguese,last_studied_date,to_be_studied_date,times_seen,times_wrong,status,percentage,last_five_array,last_five_percentage,image,sound) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)",
+    "INSERT INTO words (english,portuguese,last_studied_date,to_be_studied_date,times_seen,times_wrong,status,percentage,last_five_array,last_five_percentage,image,sound,lesson_id) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)",
     [
       english,
       portuguese,
@@ -34,6 +35,7 @@ exports.create = (req, res) => {
       lastFivePercentage,
       image,
       sound,
+      lessonId,
     ],
 
     (error, results) => {
@@ -53,7 +55,7 @@ exports.findAll = (req, res) => {
     if (error) {
       throw error;
     }
-    res.status(200).json(results.rows);
+    res.status(200).json({ words: results.rows });
   });
 };
 
@@ -90,6 +92,8 @@ exports.findMany = (req, res) => {
   );
 };
 
+//Find words in lesson
+
 //Update
 
 exports.update = (req, res) => {
@@ -108,10 +112,11 @@ exports.update = (req, res) => {
     lastFivePercentage,
     image,
     sound,
+    lessonId,
   } = req.body;
 
   pool.query(
-    "UPDATE words SET english =$1 ,portuguese = $2,last_studied_date =$3,to_be_studied_date =$4,times_seen =$5,times_wrong =$6,status =$7,percentage =$8,last_five_array =$9,last_five_percentage =$10,image =$11,sound =$12 WHERE id =$13",
+    "UPDATE words SET english =$1 ,portuguese = $2,last_studied_date =$3,to_be_studied_date =$4,times_seen =$5,times_wrong =$6,status =$7,percentage =$8,last_five_array =$9,last_five_percentage =$10,image =$11,sound =$12,lesson_id=$13 WHERE id =$14",
     [
       english,
       portuguese,
@@ -125,6 +130,7 @@ exports.update = (req, res) => {
       lastFivePercentage,
       image,
       sound,
+      lessonId,
       id,
     ],
     (error, results) => {

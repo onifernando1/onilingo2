@@ -1,5 +1,11 @@
+import Lesson from "./components/Lesson";
+
 function App() {
-  return <div>Hi</div>;
+  return (
+    <div>
+      <Lesson />
+    </div>
+  );
 }
 
 export default App;
