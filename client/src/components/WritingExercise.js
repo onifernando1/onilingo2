@@ -2,14 +2,17 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-function WritingExercise(props) {
+const WritingExercise = (props) => {
   const words = props.words;
   const wordToLearn = props.currentWordToLearn;
   const [wordInput, setWordInput] = useState("");
+  const changeCurrentWordToLearn = props.changeCurrentWordToLearn;
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (wordInput == words[wordToLearn].english) {
       alert("correct");
+      changeCurrentWordToLearn(2);
     } else {
       alert("incorrect");
     }
@@ -30,6 +33,6 @@ function WritingExercise(props) {
       </div>
     </div>
   );
-}
+};
 
 export default WritingExercise;

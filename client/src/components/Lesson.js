@@ -3,9 +3,13 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import WritingExercise from "./WritingExercise";
 
-function Lesson(props) {
+const Lesson = (props) => {
   const [words, setWords] = useState("");
-  const wordToLearn = 1;
+  const [currentWordToLearn, setCurrentWordToLearn] = useState(1);
+  const changeCurrentWordToLearn = (exerciseResponse) => {
+    setCurrentWordToLearn(exerciseResponse);
+  };
+
   useEffect(() => {
     axios.get("http://localhost:3000/lessons/1").then((response) => {
       setWords(response.data.words);
@@ -17,11 +21,16 @@ function Lesson(props) {
     <div>
       {words ? (
         <div>
-          <WritingExercise words={words} currentWordToLearn={wordToLearn} />
+          <div>{currentWordToLearn}</div>
+          <WritingExercise
+            words={words}
+            currentWordToLearn={currentWordToLearn}
+            changeCurrentWordToLearn={changeCurrentWordToLearn}
+          />
         </div>
       ) : null}
     </div>
   );
-}
+};
 
 export default Lesson;
