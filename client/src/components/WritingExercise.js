@@ -8,6 +8,7 @@ const WritingExercise = (props) => {
   const [wordInput, setWordInput] = useState("");
   const changeCurrentWordToLearn = props.changeCurrentWordToLearn;
   const updateWords = props.updateWords;
+  const [exercisesLeft, setExercisesLeft] = useState(exerciseWords.length * 5);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -67,10 +68,14 @@ const WritingExercise = (props) => {
     //   console.log("else");
     //   changeCurrentWordToLearn(0);
     // }
-    if (wordToLearn < exerciseWords.length - 1) {
+    if (exercisesLeft == 0) {
+      alert("done");
+    } else if (wordToLearn < exerciseWords.length - 1) {
       setWordToLearn(wordToLearn + 1);
-    } else {
+      setExercisesLeft(exercisesLeft - 1);
+    } else if (wordToLearn >= exerciseWords.length - 1) {
       setWordToLearn(0);
+      setExercisesLeft(exercisesLeft - 1);
     }
     updateWords(exerciseWords);
   };
@@ -78,6 +83,7 @@ const WritingExercise = (props) => {
   return (
     <div>
       <div>Write this in english</div>
+      <div>Exercises left {exercisesLeft}</div>
       <div>Word To learn {wordToLearn}</div>
       <div> {exerciseWords[wordToLearn].portuguese}</div>
       <div>
