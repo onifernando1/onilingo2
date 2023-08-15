@@ -1,5 +1,4 @@
-const db = require("../models");
-const Word = db.words;
+const pool = require("../queries");
 
 //Create
 
@@ -31,11 +30,12 @@ exports.create = (req, res) => {
 //Find All
 
 exports.findAll = (req, res) => {
-  Word.findAll()
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((err) => res.status(500).send({ message: err.message }));
+  pool.query("SELECT * FROM words ORDER BY id ASC", (error, results) => {
+    if (error) {
+      throw error;
+    }
+    res.status(200).json(results.rows);
+  });
 };
 
 //Find One
