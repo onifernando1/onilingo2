@@ -1,3 +1,4 @@
+const e = require("express");
 const pool = require("../queries");
 
 //Create
@@ -68,6 +69,25 @@ exports.findOne = (req, res) => {
       res.status(200).json(results.rows);
     }
   });
+};
+
+//Find Many
+
+exports.findMany = (req, res) => {
+  const { idsToFind } = req.body;
+  console.log(idsToFind);
+  const placeholders = idsToFind.map((id, index) => `$${index + 1}`).join(",");
+  pool.query(
+    `SELECT * FROM words WHERE id IN (${placeholders})`,
+    idsToFind,
+    (error, results) => {
+      if (error) {
+        throw error;
+      } else {
+        res.status(200).json(results.rows);
+      }
+    }
+  );
 };
 
 //Update

@@ -1,6 +1,8 @@
 const words = require("../controllers/wordController.js");
 const router = require("express").Router();
 
+router.get("/findMany", words.findMany);
+
 router.post("/", words.create);
 
 router.get("/", words.findAll);
