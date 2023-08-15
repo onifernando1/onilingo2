@@ -5,9 +5,12 @@ import WritingExercise from "./WritingExercise";
 
 const Lesson = (props) => {
   const [words, setWords] = useState("");
-  const [currentWordToLearn, setCurrentWordToLearn] = useState(1);
+  const [currentWordToLearn, setCurrentWordToLearn] = useState(0);
   const changeCurrentWordToLearn = (exerciseResponse) => {
     setCurrentWordToLearn(exerciseResponse);
+  };
+  const updateLessonWords = (exerciseResponse) => {
+    setWords(exerciseResponse);
   };
 
   useEffect(() => {
@@ -19,13 +22,14 @@ const Lesson = (props) => {
 
   return (
     <div>
-      {words ? (
+      <div>Test</div>
+      {words.length >= 1 ? (
         <div>
-          <div>{currentWordToLearn}</div>
           <WritingExercise
             words={words}
             currentWordToLearn={currentWordToLearn}
             changeCurrentWordToLearn={changeCurrentWordToLearn}
+            updateWords={updateLessonWords}
           />
         </div>
       ) : null}
