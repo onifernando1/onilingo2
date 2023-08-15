@@ -32,29 +32,24 @@ exports.findAll = (req, res) => {
 
 //Find One + Find words in lesson
 
-exports.findOne = (req, res) => {
+exports.findOne = async (req, res) => {
   const id = req.params.id;
 
-  pool.query("SELECT * FROM lessons WHERE id=$1", [id], (error, results) => {
-    if (error) {
-      throw error;
-    } else {
-      res.status(200).json(results.rows);
-    }
-  });
-
-  //Find words in lesson
-
-  pool.query(
-    "SELECT * FROM words WHERE lessonId=$1",
-    [id],
-    (error, results) => {
-      if (error) {
-        throw error;
-      }
-      res.status(200).json({ words: results.rows });
-    }
-  );
+  try {
+    const lessonRequest = await pool.query(
+      "SELECT * FROM lessons WHERE id=$1",
+      [id]
+    );
+    const lesson = lessonRequest.rows;
+    const wordsRequest = await pool.query(
+      "SELECT * FROM words WHERE lesson_id=$1",
+      [id]
+    );
+    const words = wordsRequest.rows;
+    res.status(200).send({ lesson: lesson, words: words });
+  } catch (error) {
+    res.status(500).json({ error: "An error occurred" });
+  }
 };
 
 //Update
