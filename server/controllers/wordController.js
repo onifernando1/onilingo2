@@ -43,20 +43,13 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
   const id = req.params.id;
 
-  Word.findByPk(id)
-    .then((data) => {
-      if (data) {
-        res.send(data);
-      } else
-        res.status(404).send({
-          message: `Cannot find Word with id${id}`,
-        });
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: "Error retrieving Word with id=" + id,
-      });
-    });
+  pool.query("SELECT * FROM words WHERE id=$1", [id], (error, results) => {
+    if (error) {
+      console.error(error);
+    } else {
+      res.status(200).json(results.rows);
+    }
+  });
 };
 
 //Update
