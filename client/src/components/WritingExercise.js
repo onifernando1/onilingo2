@@ -4,7 +4,7 @@ import axios from "axios";
 
 const WritingExercise = (props) => {
   const exerciseWords = props.words;
-  const wordToLearn = props.currentWordToLearn;
+  const [wordToLearn, setWordToLearn] = useState(props.currentWordToLearn);
   const [wordInput, setWordInput] = useState("");
   const changeCurrentWordToLearn = props.changeCurrentWordToLearn;
   const updateWords = props.updateWords;
@@ -60,14 +60,25 @@ const WritingExercise = (props) => {
     // exerciseWords[wordToLearn].last_studied_date =""
     // exerciseWords[wordToLearn].last_five_percentage = (correct * 100) / 5;
 
-    console.log(exerciseWords[wordToLearn]);
-    changeCurrentWordToLearn(1);
+    // if (wordToLearn < exerciseWords.length - 1) {
+    //   console.log("if");
+    //   changeCurrentWordToLearn(wordToLearn + 1);
+    // } else {
+    //   console.log("else");
+    //   changeCurrentWordToLearn(0);
+    // }
+    if (wordToLearn < exerciseWords.length - 1) {
+      setWordToLearn(wordToLearn + 1);
+    } else {
+      setWordToLearn(0);
+    }
     updateWords(exerciseWords);
   };
 
   return (
     <div>
       <div>Write this in english</div>
+      <div>Word To learn {wordToLearn}</div>
       <div> {exerciseWords[wordToLearn].portuguese}</div>
       <div>
         <form onSubmit={handleSubmit}>

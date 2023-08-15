@@ -23,6 +23,7 @@ const Lesson = (props) => {
   return (
     <div>
       <div>Test</div>
+      <div>TEST WORD TO LEARN {currentWordToLearn}</div>
       {words.length >= 1 ? (
         <div>
           <WritingExercise
