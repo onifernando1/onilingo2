@@ -4,26 +4,35 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 require("dotenv").config();
-const db = require("./models");
+// const db = require("./models");
+const db = require("./queries");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 const wordsRouter = require("./routes/words");
 const lessonsRouter = require("./routes/lessons");
 
-const Lesson = db.Lesson;
-const Word = db.Word;
-
 var app = express();
 
-db.sequelize
-  .sync()
-  .then(() => {
-    console.log("Synced db.");
-  })
-  .catch((err) => {
-    console.log("Failed to sync db: " + err.message);
-  });
+// db.sequelize
+//   .sync()
+//   .then(async () => {
+//     const lesson = await db.lessons.create({ name: "Example Lesson" });
+//     await lesson.save();
+
+//     const word = await db.words.create({
+//       english: "Hello",
+//       lessonId: lesson.id,
+//     });
+//     await word.save();
+
+//     console.log(word.Lesson);
+
+//     console.log("Synced db.");
+//   })
+//   .catch((err) => {
+//     console.log("Failed to sync db: " + err.message);
+//   });
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -55,12 +64,5 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
-
-const createWordAndLesson = async () => {
-  const word = await db.Word.create({
-    english: "hello",
-  });
-  const lesson = await db.Lesson.create({ name: "1" });
-};
 
 module.exports = app;
