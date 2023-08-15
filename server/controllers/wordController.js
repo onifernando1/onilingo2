@@ -45,7 +45,7 @@ exports.findOne = (req, res) => {
 
   pool.query("SELECT * FROM words WHERE id=$1", [id], (error, results) => {
     if (error) {
-      console.error(error);
+      throw error;
     } else {
       res.status(200).json(results.rows);
     }
@@ -61,19 +61,13 @@ exports.update = (req, res) => {};
 exports.delete = (req, res) => {
   const id = req.params.id;
 
-  Word.destroy({
-    where: { id: id },
-  })
-    .then((num) => {
-      if (num == 1) {
-        res.send({ message: "Word deleted" });
-      } else {
-        res.send(`Cannot delete Word id${id}`);
-      }
-    })
-    .catch((err) => {
-      res.status(500).send({ message: `Cannot delete Word id${id}` });
-    });
+  pool.query("DELETE FROM words WHERE id=$1", [id], (error, results) => {
+    if (error) {
+      throw error;
+    } else {
+      res.status(200).send(`User deleted ${id}`);
+    }
+  });
 };
 
 //Delete All
