@@ -72,7 +72,50 @@ exports.findOne = (req, res) => {
 
 //Update
 
-exports.update = (req, res) => {};
+exports.update = (req, res) => {
+  const id = req.params.id;
+
+  const {
+    english,
+    portuguese,
+    lastStudiedDate,
+    toBeStudiedDate,
+    timesSeen,
+    timesWrong,
+    status,
+    percentage,
+    lastFiveArray,
+    lastFivePercentage,
+    image,
+    sound,
+  } = req.body;
+
+  pool.query(
+    "UPDATE words SET english =$1 ,portuguese = $2,last_studied_date =$3,to_be_studied_date =$4,times_seen =$5,times_wrong =$6,status =$7,percentage =$8,last_five_array =$9,last_five_percentage =$10,image =$11,sound =$12 WHERE id =$13",
+    [
+      english,
+      portuguese,
+      lastStudiedDate,
+      toBeStudiedDate,
+      timesSeen,
+      timesWrong,
+      status,
+      percentage,
+      lastFiveArray,
+      lastFivePercentage,
+      image,
+      sound,
+      id,
+    ],
+    (error, results) => {
+      if (error) {
+        throw error;
+      } else {
+        res.status(200).send(`Word updated id: ${id}`);
+      }
+    }
+  );
+};
 
 //Delete
 
