@@ -3,28 +3,46 @@ const pool = require("../queries");
 //Create
 
 exports.create = (req, res) => {
-  const word = {
-    english: req.body.english,
-    portuguese: req.body.portuguese,
-    lastStudied: req.body.lastStudied,
-    toBeStudiedDate: req.body.toBeStudiedDate,
-    timesSeen: 0,
-    timesWrong: 0,
-    status: "initial",
-    percentage: 0,
-    lastFiveArray: [],
-    lastFivePercentage: 0,
-    image: req.body.image,
-    sound: req.body.sound,
-  };
+  const {
+    english,
+    portuguese,
+    lastStudiedDate,
+    toBeStudiedDate,
+    timesSeen,
+    timesWrong,
+    status,
+    percentage,
+    lastFiveArray,
+    lastFivePercentage,
+    image,
+    sound,
+  } = req.body;
 
-  Word.create(word)
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((err) => {
-      res.status(500).send({ message: err.message });
-    });
+  pool.query(
+    "INSERT INTO words (english,portuguese,last_studied_date,to_be_studied_date,times_seen,times_wrong,status,percentage,last_five_array,last_five_percentage,image,sound) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)",
+    [
+      english,
+      portuguese,
+      lastStudiedDate,
+      toBeStudiedDate,
+      timesSeen,
+      timesWrong,
+      status,
+      percentage,
+      lastFiveArray,
+      lastFivePercentage,
+      image,
+      sound,
+    ],
+
+    (error, results) => {
+      if (error) {
+        throw error;
+      } else {
+        res.status(201).send(`Word Added`);
+      }
+    }
+  );
 };
 
 //Find All

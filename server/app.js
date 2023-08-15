@@ -14,26 +14,6 @@ const lessonsRouter = require("./routes/lessons");
 
 var app = express();
 
-// db.sequelize
-//   .sync()
-//   .then(async () => {
-//     const lesson = await db.lessons.create({ name: "Example Lesson" });
-//     await lesson.save();
-
-//     const word = await db.words.create({
-//       english: "Hello",
-//       lessonId: lesson.id,
-//     });
-//     await word.save();
-
-//     console.log(word.Lesson);
-
-//     console.log("Synced db.");
-//   })
-//   .catch((err) => {
-//     console.log("Failed to sync db: " + err.message);
-//   });
-
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
