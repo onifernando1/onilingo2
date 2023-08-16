@@ -10,24 +10,39 @@ const WritingExercise = (props) => {
   const [wordInput, setWordInput] = useState("");
   const changeCurrentWordToLearn = props.changeCurrentWordToLearn;
   const updateWords = props.updateWords;
+  const [initialExercisesLeft, setInitialExercisesLeft] = useState(
+    exerciseWords.length * 5
+  );
   const [exercisesLeft, setExercisesLeft] = useState(exerciseWords.length * 5);
+  const [progressBar, setProgressBar] = useState(100);
+  const [correct, setCorrect] = useState(0);
+  const [incorrect, setIncorrect] = useState(0);
+  const [initialRender, setInitialRender] = useState(true);
+
+  useEffect(() => {
+    if (!initialRender) {
+      updateWordInformation();
+    }
+    setInitialRender(false);
+  }, [exercisesLeft]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    updateWordInformation();
-    setWordInput("");
+    setExercisesLeft(exercisesLeft - 1);
+    // updateWordInformation();
   };
 
   const updateWordInformation = () => {
+    console.log(wordInput);
     if (wordInput == exerciseWords[wordToLearn].english) {
-      alert("correct");
       if (exerciseWords[wordToLearn].last_five_array.length < 5) {
+        setCorrect(correct + 1);
         exerciseWords[wordToLearn].last_five_array.push(true);
       } else if (exerciseWords[wordToLearn].last_five_array.length == 5) {
         exerciseWords[wordToLearn].last_five_array[4] = true;
       }
     } else {
-      alert("incorrect");
+      setIncorrect(incorrect + 1);
       if (exerciseWords[wordToLearn].last_five_array.length < 5) {
         exerciseWords[wordToLearn].last_five_array.push(false);
       } else if (exerciseWords[wordToLearn].last_five_array.length == 5) {
@@ -43,12 +58,16 @@ const WritingExercise = (props) => {
       updateAllWordInformation();
     } else if (wordToLearn < exerciseWords.length - 1) {
       setWordToLearn(wordToLearn + 1);
-      setExercisesLeft(exercisesLeft - 1);
+      // setExercisesLeft(exercisesLeft - 1);
     } else if (wordToLearn >= exerciseWords.length - 1) {
       setWordToLearn(0);
-      setExercisesLeft(exercisesLeft - 1);
+      // setExercisesLeft(exercisesLeft - 1);
     }
     updateWords(exerciseWords);
+    console.log(exercisesLeft);
+    console.log(initialExercisesLeft);
+    setProgressBar((exercisesLeft / initialExercisesLeft) * 100);
+    setWordInput("");
   };
 
   const updateAllWordInformation = () => {
@@ -86,16 +105,24 @@ const WritingExercise = (props) => {
       console.log("else");
       changeCurrentWordToLearn(0);
     }
+
+    setProgressBar((exercisesLeft / wordToLearn.length) * 100);
     updateWords(exerciseWords);
   };
   return (
     <div className="writing-exercise-container">
       <div className="progress-bar">
         <div className="background-bar"></div>
-        <div className="coloured-bar"></div>
+        <div
+          className="coloured-bar"
+          style={{ width: `${progressBar}%` }}
+        ></div>
       </div>
       <div>Exercises left {exercisesLeft}</div>
       <div>Word To learn {wordToLearn}</div>
+      <div>Progress Bar: {progressBar}</div>
+      <div>Correct: {correct}</div>
+      <div>Incorrect: {incorrect}</div>
 
       <div className="individual-exercise-container">
         <div className="prompt">Write this in english</div>
@@ -112,6 +139,7 @@ const WritingExercise = (props) => {
         <div className="exercise-form">
           <form onSubmit={handleSubmit}>
             <input
+              className="word-input"
               onChange={(e) => setWordInput(e.target.value)}
               type="text"
               name="wordInput"

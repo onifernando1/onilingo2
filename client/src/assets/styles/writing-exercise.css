@@ -38,7 +38,8 @@
 .coloured-bar {
   background-color: green;
   height: 1rem;
-  width: 20rem;
+  width: 5rem;
+  margin-top: -1rem;
 }
 
 .image-and-word-container {
@@ -63,11 +64,12 @@
   border: 2px solid black;
 }
 
-.exercise-form > form > input[type="text"] {
+.word-input {
   width: 70%;
   border-radius: 10px;
   padding: 0.3rem;
-  border: none;
+  border: 1px solid grey;
+  background-color: aqua;
 }
 
 .bottom-buttons-container {
