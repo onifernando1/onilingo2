@@ -145,9 +145,19 @@ const WritingExercise = (props) => {
               name="wordInput"
               value={wordInput}
             ></input>
-            <div className="bottom-buttons-container">
-              <div className="skip">SKIP</div>
-              <input className="check" type="submit" value="CHECK" />
+            <div className={`bottom-buttons-container correct-${isCorrect}`}>
+              {isCorrect ? (
+                <>
+                  <div>Yay!</div>
+                  <div className="success">Correct!</div>
+                  <button className="check">Next</button>
+                </>
+              ) : (
+                <>
+                  <div className="skip">SKIP</div>
+                  <input className="check" type="submit" value="CHECK" />
+                </>
+              )}
             </div>
           </form>
         </div>
