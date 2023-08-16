@@ -109,7 +109,7 @@ const WritingExercise = (props) => {
           </div>
         </div>
 
-        <div>
+        <div className="exercise-form">
           <form onSubmit={handleSubmit}>
             <input
               onChange={(e) => setWordInput(e.target.value)}
@@ -117,7 +117,10 @@ const WritingExercise = (props) => {
               name="wordInput"
               value={wordInput}
             ></input>
-            <input type="submit" value="CHECK" />
+            <div className="bottom-buttons-container">
+              <div className="skip">SKIP</div>
+              <input className="check" type="submit" value="CHECK" />
+            </div>
           </form>
         </div>
       </div>

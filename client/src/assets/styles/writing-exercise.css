@@ -2,6 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 .individual-exercise-container {
@@ -42,7 +43,7 @@
 
 .image-and-word-container {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -60,4 +61,35 @@
 
 .test-word {
   border: 2px solid black;
+}
+
+.exercise-form > form > input[type="text"] {
+  width: 70%;
+  border-radius: 10px;
+  padding: 0.3rem;
+  border: none;
+}
+
+.bottom-buttons-container {
+  display: flex;
+}
+
+.check {
+  background-color: green;
+  color: white;
+  padding: 0.5rem;
+  width: 6rem;
+  border: none;
+  border-radius: 7px;
+}
+
+.skip {
+  color: grey;
+  padding: 0.5rem;
+  width: 6rem;
+  border: 1px solid grey;
+  border-radius: 7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
