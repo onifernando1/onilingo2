@@ -18,6 +18,7 @@ const WritingExercise = (props) => {
   const [correct, setCorrect] = useState(0);
   const [incorrect, setIncorrect] = useState(0);
   const [initialRender, setInitialRender] = useState(true);
+  const [isCorrect, setIsCorrect] = useState(true);
 
   useEffect(() => {
     if (!initialRender) {
