@@ -3,20 +3,22 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-top: 3rem;
 }
 
 .individual-exercise-container {
   width: 30rem;
   height: 20rem;
+  margin-top: 8rem;
 }
 
 .prompt {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: bold;
+  margin-bottom: 1rem;
 }
 
 .test-word {
-  background-color: yellow;
   height: 3rem;
   width: 5rem;
   display: flex;
@@ -29,23 +31,36 @@
   height: 5rem;
 }
 
+.progress-bar {
+  width: 40rem;
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  left: -5%;
+  top: -25%;
+}
+
 .background-bar {
-  background-color: red;
-  height: 1rem;
-  width: 20rem;
+  background-color: rgb(229, 229, 229);
+  height: 0.8rem;
+  border-radius: 10px;
 }
 
 .coloured-bar {
-  background-color: green;
-  height: 1rem;
-  width: 5rem;
-  margin-top: -1rem;
+  background-color: rgb(88, 204, 2);
+  height: 0.8rem;
+  width: 20rem;
+  margin-top: -0.8rem;
+  border-radius: 10px;
 }
 
 .image-and-word-container {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  margin-bottom: 2rem;
 }
 
 .test-word:before {
@@ -53,7 +68,7 @@
   position: absolute;
   height: 10px;
   width: 10px;
-  background-color: yellow;
+  background-color: white;
   border-top: 2px solid black;
   border-left: 2px solid black;
   transform: rotate(315deg);
@@ -69,11 +84,15 @@
   border-radius: 10px;
   padding: 0.3rem;
   border: 1px solid grey;
-  background-color: aqua;
 }
 
 .bottom-buttons-container {
   display: flex;
+  margin-top: 10rem;
+  width: 150%;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: -8rem;
 }
 
 .check {
@@ -94,4 +113,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.skip:hover {
+  background-color: rgb(224, 224, 224);
 }

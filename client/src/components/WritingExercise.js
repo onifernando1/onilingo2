@@ -14,7 +14,7 @@ const WritingExercise = (props) => {
     exerciseWords.length * 5
   );
   const [exercisesLeft, setExercisesLeft] = useState(exerciseWords.length * 5);
-  const [progressBar, setProgressBar] = useState(100);
+  const [progressBar, setProgressBar] = useState(0);
   const [correct, setCorrect] = useState(0);
   const [incorrect, setIncorrect] = useState(0);
   const [initialRender, setInitialRender] = useState(true);
@@ -34,7 +34,7 @@ const WritingExercise = (props) => {
 
   const updateWordInformation = () => {
     console.log(wordInput);
-    if (wordInput == exerciseWords[wordToLearn].english) {
+    if (wordInput == exerciseWords[wordToLearn].portuguese) {
       if (exerciseWords[wordToLearn].last_five_array.length < 5) {
         setCorrect(correct + 1);
         exerciseWords[wordToLearn].last_five_array.push(true);
@@ -66,7 +66,7 @@ const WritingExercise = (props) => {
     updateWords(exerciseWords);
     console.log(exercisesLeft);
     console.log(initialExercisesLeft);
-    setProgressBar((exercisesLeft / initialExercisesLeft) * 100);
+    setProgressBar(100 - (exercisesLeft / initialExercisesLeft) * 100);
     setWordInput("");
   };
 
@@ -112,28 +112,27 @@ const WritingExercise = (props) => {
   return (
     <div className="writing-exercise-container">
       <div className="progress-bar">
+        <div className="close">X</div>
         <div className="background-bar"></div>
         <div
           className="coloured-bar"
           style={{ width: `${progressBar}%` }}
         ></div>
       </div>
-      <div>Exercises left {exercisesLeft}</div>
+      {/* <div>Exercises left {exercisesLeft}</div>
       <div>Word To learn {wordToLearn}</div>
       <div>Progress Bar: {progressBar}</div>
       <div>Correct: {correct}</div>
-      <div>Incorrect: {incorrect}</div>
+      <div>Incorrect: {incorrect}</div> */}
 
       <div className="individual-exercise-container">
-        <div className="prompt">Write this in english</div>
+        <div className="prompt">Write this in portuguese</div>
         <div className="image-and-word-container">
           <img
             className="evil-duo"
             src={require("../assets/images/evilDuo.jpg")}
           ></img>
-          <div className="test-word">
-            {exerciseWords[wordToLearn].portuguese}
-          </div>
+          <div className="test-word">{exerciseWords[wordToLearn].english}</div>
         </div>
 
         <div className="exercise-form">
