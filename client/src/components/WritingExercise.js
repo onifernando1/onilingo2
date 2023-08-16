@@ -17,8 +17,8 @@ const WritingExercise = (props) => {
   };
 
   const updateWordInformation = () => {
-    // let correct = 0;
-    // let incorrect = 0;
+    let correct = 0;
+    let incorrect = 0;
     if (wordInput == exerciseWords[wordToLearn].english) {
       alert("correct");
       if (exerciseWords[wordToLearn].last_five_array.length < 5) {
@@ -36,40 +36,11 @@ const WritingExercise = (props) => {
       exerciseWords[wordToLearn].times_wrong++;
     }
 
-    // exerciseWords[wordToLearn].percentage =
-    //   (exerciseWords[wordToLearn].times_seen -
-    //     exerciseWords[wordToLearn].times_wrong) /
-    //   exerciseWords[wordToLearn].times_seen;
-
-    // if (exerciseWords[wordToLearn].last_five_array.length == 5) {
-    //   for (
-    //     let i = 0;
-    //     i < exerciseWords[wordToLearn].last_five_array.length;
-    //     i++
-    //   ) {
-    //     if (exerciseWords[wordToLearn].last_five_array[i] == true) {
-    //       correct++;
-    //     } else {
-    //       incorrect++;
-    //     }
-    //   }
-    // }
-
     exerciseWords[wordToLearn].times_seen++;
-    // exerciseWords[wordToLearn].last_studied_date =
-    // new Date().toLocaleDateString() + "";
-    // exerciseWords[wordToLearn].last_studied_date =""
-    // exerciseWords[wordToLearn].last_five_percentage = (correct * 100) / 5;
 
-    // if (wordToLearn < exerciseWords.length - 1) {
-    //   console.log("if");
-    //   changeCurrentWordToLearn(wordToLearn + 1);
-    // } else {
-    //   console.log("else");
-    //   changeCurrentWordToLearn(0);
-    // }
     if (exercisesLeft == 0) {
       alert("done");
+      updateAllWordInformation();
     } else if (wordToLearn < exerciseWords.length - 1) {
       setWordToLearn(wordToLearn + 1);
       setExercisesLeft(exercisesLeft - 1);
@@ -80,6 +51,39 @@ const WritingExercise = (props) => {
     updateWords(exerciseWords);
   };
 
+  const updateAllWordInformation = () => {
+    exerciseWords[wordToLearn].percentage =
+      (exerciseWords[wordToLearn].times_seen -
+        exerciseWords[wordToLearn].times_wrong) /
+      exerciseWords[wordToLearn].times_seen;
+
+    if (exerciseWords[wordToLearn].last_five_array.length == 5) {
+      for (
+        let i = 0;
+        i < exerciseWords[wordToLearn].last_five_array.length;
+        i++
+      ) {
+        if (exerciseWords[wordToLearn].last_five_array[i] == true) {
+          correct++;
+        } else {
+          incorrect++;
+        }
+      }
+    }
+    exerciseWords[wordToLearn].last_studied_date =
+      new Date().toLocaleDateString() + "";
+    exerciseWords[wordToLearn].last_studied_date = "";
+    exerciseWords[wordToLearn].last_five_percentage = (correct * 100) / 5;
+
+    if (wordToLearn < exerciseWords.length - 1) {
+      console.log("if");
+      changeCurrentWordToLearn(wordToLearn + 1);
+    } else {
+      console.log("else");
+      changeCurrentWordToLearn(0);
+    }
+    updateWords(exerciseWords);
+  };
   return (
     <div>
       <div>Write this in english</div>
