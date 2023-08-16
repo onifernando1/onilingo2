@@ -1,0 +1,25 @@
+.writing-exercise-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.individual-exercise-container {
+  width: 30rem;
+  height: 20rem;
+}
+
+.prompt {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.test-word {
+  background-color: yellow;
+  height: 3rem;
+  width: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
