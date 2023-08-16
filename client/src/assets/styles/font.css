@@ -1,0 +1,5 @@
+@font-face {
+  font-family: "DinRoundProMedi";
+  src: local("DinRoundProMedi"),
+    url("../fonts/DINRoundPro-Medi.woff") format("woff");
+}

@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "../assets/styles/writing-exercise.css";
+import "../assets/styles/body.css";
 
 const WritingExercise = (props) => {
   const exerciseWords = props.words;
