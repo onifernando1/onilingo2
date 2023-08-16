@@ -23,3 +23,19 @@
   align-items: center;
   border-radius: 10px;
 }
+
+.evil-duo {
+  height: 8rem;
+}
+
+.background-bar {
+  background-color: red;
+  height: 1rem;
+  width: 20rem;
+}
+
+.coloured-bar {
+  background-color: green;
+  height: 1rem;
+  width: 20rem;
+}

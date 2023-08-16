@@ -90,11 +90,25 @@ const WritingExercise = (props) => {
   };
   return (
     <div className="writing-exercise-container">
+      <div className="progress-bar">
+        <div className="background-bar"></div>
+        <div className="coloured-bar"></div>
+      </div>
+      <div>Exercises left {exercisesLeft}</div>
+      <div>Word To learn {wordToLearn}</div>
+
       <div className="individual-exercise-container">
         <div className="prompt">Write this in english</div>
-        <div>Exercises left {exercisesLeft}</div>
-        <div>Word To learn {wordToLearn}</div>
-        <div className="test-word">{exerciseWords[wordToLearn].portuguese}</div>
+        <div>
+          <img
+            className="evil-duo"
+            src={require("../assets/images/evilDuo.jpg")}
+          ></img>
+          <div className="test-word">
+            {exerciseWords[wordToLearn].portuguese}
+          </div>
+        </div>
+
         <div>
           <form onSubmit={handleSubmit}>
             <input
@@ -103,7 +117,7 @@ const WritingExercise = (props) => {
               name="wordInput"
               value={wordInput}
             ></input>
-            <input type="submit" value="check" />
+            <input type="submit" value="CHECK" />
           </form>
         </div>
       </div>
