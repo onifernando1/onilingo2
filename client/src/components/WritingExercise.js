@@ -99,7 +99,7 @@ const WritingExercise = (props) => {
 
       <div className="individual-exercise-container">
         <div className="prompt">Write this in english</div>
-        <div>
+        <div className="image-and-word-container">
           <img
             className="evil-duo"
             src={require("../assets/images/evilDuo.jpg")}
