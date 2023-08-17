@@ -14,11 +14,21 @@ const LessonManager = (props) => {
           <div>GUIDEBOOK</div>
         </div>
       </div>
-      <div>
+      <div className="lesson-circle-container">
         <Link to="lesson">
           <div className="start">START</div>
-          <div className="circle">Star shape</div>
+          <div className="circle-container">
+            <div className="outer-grey"></div>
+            <div className="outer-white"></div>
+            <div className="circle">Star</div>
+          </div>
         </Link>
+      </div>
+      <div>
+        <img
+          className="evil-duo manager"
+          src={require("../assets/images/evilDuo.jpg")}
+        ></img>
       </div>
     </div>
   );
