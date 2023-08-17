@@ -149,24 +149,51 @@ const WritingExercise = (props) => {
       <div>Incorrect: {incorrect}</div> */}
 
       <div className="individual-exercise-container">
-        <div className="prompt">Write this in portuguese</div>
-        <div className="image-and-word-container">
-          <img
-            className="evil-duo"
-            src={require("../assets/images/evilDuo.jpg")}
-          ></img>
-          <div className="test-word">{exerciseWords[wordToLearn].english}</div>
-        </div>
+        {!isIncorrect ? (
+          <>
+            {" "}
+            <div className="prompt">Write this in portuguese</div>
+            <div className="image-and-word-container">
+              <img
+                className="evil-duo"
+                src={require("../assets/images/evilDuo.jpg")}
+              ></img>
+              <div className="test-word">
+                {exerciseWords[wordToLearn].english}
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="prompt">The answer was</div>
+            <div className="image-and-word-container">
+              <img
+                className="evil-duo"
+                src={require("../assets/images/duoKnife.jpg")}
+              ></img>
+              <div className="test-word">
+                {exerciseWords[wordToLearn].portuguese}
+              </div>
+            </div>{" "}
+          </>
+        )}
 
         <div className="exercise-form">
           <form onSubmit={handleSubmit}>
-            <input
-              className="word-input"
-              onChange={(e) => setWordInput(e.target.value)}
-              type="text"
-              name="wordInput"
-              value={wordInput}
-            ></input>
+            {!isIncorrect ? (
+              <>
+                <input
+                  className="word-input"
+                  onChange={(e) => setWordInput(e.target.value)}
+                  type="text"
+                  name="wordInput"
+                  value={wordInput}
+                ></input>
+              </>
+            ) : (
+              <></>
+            )}
+
             <div className={`bottom-buttons-container correct-${isCorrect}`}>
               {isCorrect ? (
                 <>
