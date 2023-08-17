@@ -97,6 +97,11 @@
   margin-left: -8rem;
 }
 
+.correct-true,
+.incorrect-true {
+  margin-top: 15rem;
+}
+
 .check {
   background-color: green;
   color: white;

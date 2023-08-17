@@ -131,6 +131,7 @@ const WritingExercise = (props) => {
   };
 
   const updateLastFivePercentage = () => {
+    console.log("called");
     let correct = 0;
     let incorrect = 0;
     let tempArray = [...exerciseWords];
@@ -155,11 +156,11 @@ const WritingExercise = (props) => {
   };
 
   const updateWordDataForBackend = () => {
-    // updatePercentage();
-    // updateLastFivePercentage();
-    // updateLastStudiedDate();
-    // console.log(exerciseWords);
-    // updateWords(exerciseWords);
+    updatePercentage();
+    updateLastFivePercentage();
+    updateLastStudiedDate();
+    console.log(exerciseWords);
+    updateWords(exerciseWords);
   };
 
   const displayCorrect = () => {
@@ -194,11 +195,11 @@ const WritingExercise = (props) => {
                 style={{ width: `${progressBar}%` }}
               ></div>
             </div>
-            <div>Exercises left {exercisesLeft}</div>
+            {/* <div>Exercises left {exercisesLeft}</div>
             <div>Word To learn {wordToLearn}</div>
             <div>Progress Bar: {progressBar}</div>
             <div>Correct: {correct}</div>
-            <div>Incorrect: {incorrect}</div>
+            <div>Incorrect: {incorrect}</div> */}
 
             <div className="individual-exercise-container">
               {!isIncorrect ? (
@@ -248,7 +249,7 @@ const WritingExercise = (props) => {
                   )}
 
                   <div
-                    className={`bottom-buttons-container correct-${isCorrect}`}
+                    className={`bottom-buttons-container correct-${isCorrect} incorrect-${isIncorrect}`}
                   >
                     {isCorrect ? (
                       <>
