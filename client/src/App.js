@@ -4,6 +4,7 @@ function App() {
   return (
     <div>
       <Lesson />
+      <div>Hi</div>
     </div>
   );
 }

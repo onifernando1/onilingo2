@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "../assets/styles/writing-exercise.css";
 import "../assets/styles/body.css";
+import { Link } from "react-router-dom";
 
 const WritingExercise = (props) => {
   // const exerciseWords = props.words;
@@ -188,7 +189,9 @@ const WritingExercise = (props) => {
         <>
           <div className="writing-exercise-container">
             <div className="progress-bar">
-              <div className="close">X</div>
+              <Link to="/">
+                <div className="close">X</div>
+              </Link>
               <div className="background-bar"></div>
               <div
                 className="coloured-bar"
