@@ -211,8 +211,11 @@ const WritingExercise = (props) => {
 
               <div className="exercise-form">
                 <form onSubmit={handleSubmit}>
-                  {!isIncorrect ? (
+                  {isIncorrect || isCorrect ? (
+                    <></>
+                  ) : (
                     <>
+                      {" "}
                       <input
                         className="word-input"
                         onChange={(e) => setWordInput(e.target.value)}
@@ -221,8 +224,6 @@ const WritingExercise = (props) => {
                         value={wordInput}
                       ></input>
                     </>
-                  ) : (
-                    <></>
                   )}
 
                   <div
@@ -269,7 +270,11 @@ const WritingExercise = (props) => {
           </div>
         </>
       ) : (
-        <div>Lesson Complete!</div>
+        <div>
+          <div>Lesson Complete!</div>
+          <div>Correct: {correct}</div>
+          <div>Incorrect:{incorrect}</div>
+        </div>
       )}
     </>
   );
