@@ -5,7 +5,41 @@ import "../assets/styles/writing-exercise.css";
 import "../assets/styles/body.css";
 
 const WritingExercise = (props) => {
-  const exerciseWords = props.words;
+  // const exerciseWords = props.words;
+  const exerciseWords = [
+    {
+      id: 34,
+      english: "hi",
+      portuguese: "olá",
+      times_seen: 0,
+      times_wrong: 0,
+      status: "learning",
+      last_studied_date: null,
+      to_be_studied_date: null,
+      percentage: 0,
+      last_five_array: [],
+      last_five_percentage: 0,
+      image: null,
+      sound: null,
+      lesson_id: 1,
+    },
+    {
+      id: 35,
+      english: "what's up?",
+      portuguese: "e então?",
+      times_seen: 0,
+      times_wrong: 0,
+      status: "learning",
+      last_studied_date: null,
+      to_be_studied_date: null,
+      percentage: 0,
+      last_five_array: [],
+      last_five_percentage: 0,
+      image: null,
+      sound: null,
+      lesson_id: 1,
+    },
+  ];
   const [wordToLearn, setWordToLearn] = useState(props.currentWordToLearn);
   const [wordInput, setWordInput] = useState("");
   const changeCurrentWordToLearn = props.changeCurrentWordToLearn;
@@ -20,13 +54,7 @@ const WritingExercise = (props) => {
   const [initialRender, setInitialRender] = useState(true);
   const [isCorrect, setIsCorrect] = useState(false);
   const [isIncorrect, setIsIncorrect] = useState(false);
-
-  // useEffect(() => {
-  //   if (!initialRender) {
-  //     updateWordInformation();
-  //   }
-  //   setInitialRender(false);
-  // }, [exercisesLeft]);
+  const [lessonComplete, setLessonComplete] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -43,8 +71,9 @@ const WritingExercise = (props) => {
   };
 
   const moveToNextExercise = () => {
-    if (exercisesLeft == 0) {
+    if (exercisesLeft <= 0) {
       alert("done");
+      setLessonComplete(true);
       updateWordDataForBackend();
     } else if (wordToLearn < exerciseWords.length - 1) {
       setWordToLearn(wordToLearn + 1);
@@ -67,7 +96,6 @@ const WritingExercise = (props) => {
 
     moveToNextExercise();
 
-    // updateWords(exerciseWords);
     setProgressBar(100 - (exercisesLeft / initialExercisesLeft) * 100);
   };
 
@@ -133,103 +161,117 @@ const WritingExercise = (props) => {
   };
 
   return (
-    <div className="writing-exercise-container">
-      <div className="progress-bar">
-        <div className="close">X</div>
-        <div className="background-bar"></div>
-        <div
-          className="coloured-bar"
-          style={{ width: `${progressBar}%` }}
-        ></div>
-      </div>
-      {/* <div>Exercises left {exercisesLeft}</div>
-      <div>Word To learn {wordToLearn}</div>
-      <div>Progress Bar: {progressBar}</div>
-      <div>Correct: {correct}</div>
-      <div>Incorrect: {incorrect}</div> */}
-
-      <div className="individual-exercise-container">
-        {!isIncorrect ? (
-          <>
-            {" "}
-            <div className="prompt">Write this in portuguese</div>
-            <div className="image-and-word-container">
-              <img
-                className="evil-duo"
-                src={require("../assets/images/evilDuo.jpg")}
-              ></img>
-              <div className="test-word">
-                {exerciseWords[wordToLearn].english}
-              </div>
+    <>
+      {!lessonComplete ? (
+        <>
+          <div className="writing-exercise-container">
+            <div className="progress-bar">
+              <div className="close">X</div>
+              <div className="background-bar"></div>
+              <div
+                className="coloured-bar"
+                style={{ width: `${progressBar}%` }}
+              ></div>
             </div>
-          </>
-        ) : (
-          <>
-            <div className="prompt">The answer was</div>
-            <div className="image-and-word-container">
-              <img
-                className="evil-duo"
-                src={require("../assets/images/duoKnife.jpg")}
-              ></img>
-              <div className="test-word">
-                {exerciseWords[wordToLearn].portuguese}
-              </div>
-            </div>{" "}
-          </>
-        )}
+            <div>Exercises left {exercisesLeft}</div>
+            <div>Word To learn {wordToLearn}</div>
+            <div>Progress Bar: {progressBar}</div>
+            <div>Correct: {correct}</div>
+            <div>Incorrect: {incorrect}</div>
 
-        <div className="exercise-form">
-          <form onSubmit={handleSubmit}>
-            {!isIncorrect ? (
-              <>
-                <input
-                  className="word-input"
-                  onChange={(e) => setWordInput(e.target.value)}
-                  type="text"
-                  name="wordInput"
-                  value={wordInput}
-                ></input>
-              </>
-            ) : (
-              <></>
-            )}
-
-            <div className={`bottom-buttons-container correct-${isCorrect}`}>
-              {isCorrect ? (
+            <div className="individual-exercise-container">
+              {!isIncorrect ? (
                 <>
-                  <div>Yay!</div>
-                  <div className="success">Correct!</div>
-                  <button onClick={handleAnswer} className="check">
-                    Next
-                  </button>
+                  {" "}
+                  <div className="prompt">Write this in portuguese</div>
+                  <div className="image-and-word-container">
+                    <img
+                      className="evil-duo"
+                      src={require("../assets/images/evilDuo.jpg")}
+                    ></img>
+                    <div className="test-word">
+                      {exerciseWords[wordToLearn].english}
+                    </div>
+                  </div>
                 </>
               ) : (
                 <>
-                  {isIncorrect ? (
-                    <>
-                      <div>Uh Oh!</div>
-                      <div className="incorrect">Incorrect!</div>
-                      <button
-                        style={{ backgroundColor: "red" }}
-                        onClick={handleAnswer}
-                        className="check"
-                      >
-                        Next
-                      </button>
-                    </>
-                  ) : (
-                    <>
-                      <div className="skip">SKIP</div>
-                      <input className="check" type="submit" value="CHECK" />
-                    </>
-                  )}
+                  <div className="prompt">The answer was</div>
+                  <div className="image-and-word-container">
+                    <img
+                      className="evil-duo"
+                      src={require("../assets/images/duoKnife.jpg")}
+                    ></img>
+                    <div className="test-word">
+                      {exerciseWords[wordToLearn].portuguese}
+                    </div>
+                  </div>{" "}
                 </>
               )}
+
+              <div className="exercise-form">
+                <form onSubmit={handleSubmit}>
+                  {!isIncorrect ? (
+                    <>
+                      <input
+                        className="word-input"
+                        onChange={(e) => setWordInput(e.target.value)}
+                        type="text"
+                        name="wordInput"
+                        value={wordInput}
+                      ></input>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+
+                  <div
+                    className={`bottom-buttons-container correct-${isCorrect}`}
+                  >
+                    {isCorrect ? (
+                      <>
+                        <div>Yay!</div>
+                        <div className="success">Correct!</div>
+                        <button onClick={handleAnswer} className="check">
+                          Next
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        {isIncorrect ? (
+                          <>
+                            <div>Uh Oh!</div>
+                            <div className="incorrect">Incorrect!</div>
+                            <button
+                              style={{ backgroundColor: "red" }}
+                              onClick={handleAnswer}
+                              className="check"
+                            >
+                              Next
+                            </button>
+                          </>
+                        ) : (
+                          <>
+                            <div className="skip">SKIP</div>
+                            <input
+                              className="check"
+                              type="submit"
+                              value="CHECK"
+                            />
+                          </>
+                        )}
+                      </>
+                    )}
+                  </div>
+                </form>
+              </div>
             </div>
-          </form>
-        </div>
-      </div>
-    </div>
+          </div>
+        </>
+      ) : (
+        <div>Lesson Complete!</div>
+      )}
+    </>
   );
 };
 
