@@ -14,10 +14,10 @@ const LessonManager = (props) => {
           <div>GUIDEBOOK</div>
         </div>
       </div>
-      <div className="start">
+      <div>
         <Link to="lesson">
-          <div>Start</div>
-          <div>Star shape</div>
+          <div className="start">START</div>
+          <div className="circle">Star shape</div>
         </Link>
       </div>
     </div>

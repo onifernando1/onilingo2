@@ -32,4 +32,55 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 0px 3px 2px 0px rgba(0, 0, 0, 0.8);
+}
+
+.circle {
+  background-color: rgb(88, 204, 2);
+  color: white;
+  border-radius: 100%;
+  height: 5rem;
+  width: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+a {
+  text-decoration: none;
+}
+
+.start {
+  color: green;
+  width: 5rem;
+  height: 2rem;
+  border: 2px solid grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+  animation: MoveUpAndDown 2s linear infinite;
+}
+
+.start:before {
+  content: "";
+  position: absolute;
+  height: 10px;
+  width: 10px;
+  background-color: white;
+  border-top: 2px solid grey;
+  border-left: 2px solid grey;
+  transform: rotate(-135deg);
+  margin-top: 35px;
+}
+
+@keyframes MoveUpAndDown {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
 }
