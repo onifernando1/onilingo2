@@ -18,7 +18,8 @@ const WritingExercise = (props) => {
   const [correct, setCorrect] = useState(0);
   const [incorrect, setIncorrect] = useState(0);
   const [initialRender, setInitialRender] = useState(true);
-  const [isCorrect, setIsCorrect] = useState(true);
+  const [isCorrect, setIsCorrect] = useState(false);
+  const [isIncorrect, setIsIncorrect] = useState(false);
 
   useEffect(() => {
     if (!initialRender) {
@@ -29,7 +30,8 @@ const WritingExercise = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setExercisesLeft(exercisesLeft - 1);
+    displayCorrect();
+    // setExercisesLeft(exercisesLeft - 1);
     // updateWordInformation();
   };
 
@@ -110,6 +112,28 @@ const WritingExercise = (props) => {
     setProgressBar((exercisesLeft / wordToLearn.length) * 100);
     updateWords(exerciseWords);
   };
+
+  const displayCorrect = () => {
+    if (wordInput == exerciseWords[wordToLearn].portuguese) {
+      setIsCorrect(true);
+    } else {
+      setIsIncorrect(true);
+    }
+  };
+
+  const handleAnswer = () => {
+    if (isCorrect) {
+      setIsCorrect(false);
+      setExercisesLeft(exercisesLeft - 1);
+      updateWordInformation();
+    }
+    if (isIncorrect) {
+      setIsIncorrect(false);
+      setExercisesLeft(exercisesLeft - 1);
+      updateWordInformation();
+    }
+  };
+
   return (
     <div className="writing-exercise-container">
       <div className="progress-bar">
@@ -150,12 +174,30 @@ const WritingExercise = (props) => {
                 <>
                   <div>Yay!</div>
                   <div className="success">Correct!</div>
-                  <button className="check">Next</button>
+                  <button onClick={handleAnswer} className="check">
+                    Next
+                  </button>
                 </>
               ) : (
                 <>
-                  <div className="skip">SKIP</div>
-                  <input className="check" type="submit" value="CHECK" />
+                  {isIncorrect ? (
+                    <>
+                      <div>Uh Oh!</div>
+                      <div className="incorrect">Incorrect!</div>
+                      <button
+                        style={{ backgroundColor: "red" }}
+                        onClick={handleAnswer}
+                        className="check"
+                      >
+                        Next
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <div className="skip">SKIP</div>
+                      <input className="check" type="submit" value="CHECK" />
+                    </>
+                  )}
                 </>
               )}
             </div>
