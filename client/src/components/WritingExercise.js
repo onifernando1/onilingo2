@@ -21,66 +21,66 @@ const WritingExercise = (props) => {
   const [isCorrect, setIsCorrect] = useState(false);
   const [isIncorrect, setIsIncorrect] = useState(false);
 
-  useEffect(() => {
-    if (!initialRender) {
-      updateWordInformation();
-    }
-    setInitialRender(false);
-  }, [exercisesLeft]);
+  // useEffect(() => {
+  //   if (!initialRender) {
+  //     updateWordInformation();
+  //   }
+  //   setInitialRender(false);
+  // }, [exercisesLeft]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     displayCorrect();
-    // setExercisesLeft(exercisesLeft - 1);
-    // updateWordInformation();
+    setWordInput("");
+  };
+
+  const updateLastFiveArray = (bool) => {
+    if (exerciseWords[wordToLearn].last_five_array.length < 5) {
+      exerciseWords[wordToLearn].last_five_array.push(bool);
+    } else if (exerciseWords[wordToLearn].last_five_array.length == 5) {
+      exerciseWords[wordToLearn].last_five_array[4] = bool;
+    }
+  };
+
+  const moveToNextExercise = () => {
+    if (exercisesLeft == 0) {
+      alert("done");
+      updateWordDataForBackend();
+    } else if (wordToLearn < exerciseWords.length - 1) {
+      setWordToLearn(wordToLearn + 1);
+    } else if (wordToLearn >= exerciseWords.length - 1) {
+      setWordToLearn(0);
+    }
   };
 
   const updateWordInformation = () => {
-    console.log(wordInput);
     if (wordInput == exerciseWords[wordToLearn].portuguese) {
-      if (exerciseWords[wordToLearn].last_five_array.length < 5) {
-        setCorrect(correct + 1);
-        exerciseWords[wordToLearn].last_five_array.push(true);
-      } else if (exerciseWords[wordToLearn].last_five_array.length == 5) {
-        exerciseWords[wordToLearn].last_five_array[4] = true;
-      }
+      setCorrect(correct + 1);
+      updateLastFiveArray(true);
     } else {
       setIncorrect(incorrect + 1);
-      if (exerciseWords[wordToLearn].last_five_array.length < 5) {
-        exerciseWords[wordToLearn].last_five_array.push(false);
-      } else if (exerciseWords[wordToLearn].last_five_array.length == 5) {
-        exerciseWords[wordToLearn].last_five_array[4] = false;
-      }
+      updateLastFiveArray(false);
       exerciseWords[wordToLearn].times_wrong++;
     }
 
     exerciseWords[wordToLearn].times_seen++;
 
-    if (exercisesLeft == 0) {
-      alert("done");
-      updateAllWordInformation();
-    } else if (wordToLearn < exerciseWords.length - 1) {
-      setWordToLearn(wordToLearn + 1);
-      // setExercisesLeft(exercisesLeft - 1);
-    } else if (wordToLearn >= exerciseWords.length - 1) {
-      setWordToLearn(0);
-      // setExercisesLeft(exercisesLeft - 1);
-    }
-    updateWords(exerciseWords);
-    console.log(exercisesLeft);
-    console.log(initialExercisesLeft);
+    moveToNextExercise();
+
+    // updateWords(exerciseWords);
     setProgressBar(100 - (exercisesLeft / initialExercisesLeft) * 100);
-    setWordInput("");
   };
 
-  const updateAllWordInformation = () => {
-    let correct = 0;
-    let incorrect = 0;
+  const updatePercentage = () => {
     exerciseWords[wordToLearn].percentage =
       (exerciseWords[wordToLearn].times_seen -
         exerciseWords[wordToLearn].times_wrong) /
       exerciseWords[wordToLearn].times_seen;
+  };
 
+  const updateLastFivePercentage = () => {
+    let correct = 0;
+    let incorrect = 0;
     if (exerciseWords[wordToLearn].last_five_array.length == 5) {
       for (
         let i = 0;
@@ -94,22 +94,22 @@ const WritingExercise = (props) => {
         }
       }
       exerciseWords[wordToLearn].last_five_percentage = (correct * 100) / 5;
-      correct = 0;
-      incorrect = 0;
     }
+  };
+
+  const updateLastStudiedDate = () => {
     exerciseWords[wordToLearn].last_studied_date =
       new Date().toLocaleDateString() + "";
     exerciseWords[wordToLearn].last_studied_date = "";
+  };
 
-    if (wordToLearn < exerciseWords.length - 1) {
-      console.log("if");
-      changeCurrentWordToLearn(wordToLearn + 1);
-    } else {
-      console.log("else");
-      changeCurrentWordToLearn(0);
-    }
+  const updateWordDataForBackend = () => {
+    updatePercentage();
 
-    setProgressBar((exercisesLeft / wordToLearn.length) * 100);
+    updateLastFivePercentage();
+
+    updateLastStudiedDate();
+
     updateWords(exerciseWords);
   };
 
@@ -124,14 +124,12 @@ const WritingExercise = (props) => {
   const handleAnswer = () => {
     if (isCorrect) {
       setIsCorrect(false);
-      setExercisesLeft(exercisesLeft - 1);
-      updateWordInformation();
     }
     if (isIncorrect) {
       setIsIncorrect(false);
-      setExercisesLeft(exercisesLeft - 1);
-      updateWordInformation();
     }
+    updateWordInformation();
+    setExercisesLeft(exercisesLeft - 1);
   };
 
   return (
