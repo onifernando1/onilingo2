@@ -6,7 +6,7 @@ import "../assets/styles/body.css";
 
 const WritingExercise = (props) => {
   // const exerciseWords = props.words;
-  const exerciseWords = [
+  const [exerciseWords, setExerciseWords] = useState([
     {
       id: 34,
       english: "hi",
@@ -39,7 +39,7 @@ const WritingExercise = (props) => {
       sound: null,
       lesson_id: 1,
     },
-  ];
+  ]);
   const [wordToLearn, setWordToLearn] = useState(props.currentWordToLearn);
   const [wordInput, setWordInput] = useState("");
   const changeCurrentWordToLearn = props.changeCurrentWordToLearn;
@@ -63,10 +63,13 @@ const WritingExercise = (props) => {
   };
 
   const updateLastFiveArray = (bool) => {
+    let tempArray = [...exerciseWords];
     if (exerciseWords[wordToLearn].last_five_array.length < 5) {
-      exerciseWords[wordToLearn].last_five_array.push(bool);
+      tempArray[wordToLearn].last_five_array.push(bool);
+      setExerciseWords(tempArray);
     } else if (exerciseWords[wordToLearn].last_five_array.length == 5) {
-      exerciseWords[wordToLearn].last_five_array[4] = bool;
+      tempArray[wordToLearn].last_five_array[4] = bool;
+      setExerciseWords(tempArray);
     }
   };
 
@@ -82,6 +85,18 @@ const WritingExercise = (props) => {
     }
   };
 
+  const checkForCorrectWord = (wordInput, desiredWord) => {
+    let formattedWordInput = wordInput.ToLowerCase();
+    let desiredWordArray = [];
+    desiredWordArray.push(desiredWord.toLowerCase());
+
+    if (wordInput == exerciseWords[wordToLearn].portuguese) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   const updateWordInformation = () => {
     if (wordInput == exerciseWords[wordToLearn].portuguese) {
       setCorrect(correct + 1);
@@ -89,10 +104,18 @@ const WritingExercise = (props) => {
     } else {
       setIncorrect(incorrect + 1);
       updateLastFiveArray(false);
-      exerciseWords[wordToLearn].times_wrong++;
+      let tempArray = [...exerciseWords];
+      tempArray[wordToLearn].times_wrong++;
+      setExerciseWords(tempArray);
     }
 
-    exerciseWords[wordToLearn].times_seen++;
+    let tempArray = [...exerciseWords];
+
+    tempArray[wordToLearn].times_seen++;
+
+    setExerciseWords(tempArray);
+
+    console.log(exerciseWords[wordToLearn]);
 
     moveToNextExercise();
 
@@ -100,45 +123,43 @@ const WritingExercise = (props) => {
   };
 
   const updatePercentage = () => {
-    exerciseWords[wordToLearn].percentage =
-      (exerciseWords[wordToLearn].times_seen -
-        exerciseWords[wordToLearn].times_wrong) /
-      exerciseWords[wordToLearn].times_seen;
+    let tempArray = [...exerciseWords];
+    tempArray[wordToLearn].percentage =
+      (tempArray[wordToLearn].times_seen - tempArray[wordToLearn].times_wrong) /
+      tempArray[wordToLearn].times_seen;
+    setExerciseWords(tempArray);
   };
 
   const updateLastFivePercentage = () => {
     let correct = 0;
     let incorrect = 0;
-    if (exerciseWords[wordToLearn].last_five_array.length == 5) {
-      for (
-        let i = 0;
-        i < exerciseWords[wordToLearn].last_five_array.length;
-        i++
-      ) {
-        if (exerciseWords[wordToLearn].last_five_array[i] == true) {
+    let tempArray = [...exerciseWords];
+    if (tempArray[wordToLearn].last_five_array.length == 5) {
+      for (let i = 0; i < tempArray[wordToLearn].last_five_array.length; i++) {
+        if (tempArray[wordToLearn].last_five_array[i] == true) {
           correct++;
         } else {
           incorrect++;
         }
       }
-      exerciseWords[wordToLearn].last_five_percentage = (correct * 100) / 5;
+      tempArray[wordToLearn].last_five_percentage = (correct * 100) / 5;
+      setExerciseWords(tempArray);
     }
   };
 
   const updateLastStudiedDate = () => {
-    exerciseWords[wordToLearn].last_studied_date =
+    let tempArray = [...exerciseWords];
+    tempArray[wordToLearn].last_studied_date =
       new Date().toLocaleDateString() + "";
-    exerciseWords[wordToLearn].last_studied_date = "";
+    setExerciseWords(tempArray);
   };
 
   const updateWordDataForBackend = () => {
-    updatePercentage();
-
-    updateLastFivePercentage();
-
-    updateLastStudiedDate();
-
-    updateWords(exerciseWords);
+    // updatePercentage();
+    // updateLastFivePercentage();
+    // updateLastStudiedDate();
+    // console.log(exerciseWords);
+    // updateWords(exerciseWords);
   };
 
   const displayCorrect = () => {
