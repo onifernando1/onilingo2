@@ -86,12 +86,25 @@ const WritingExercise = (props) => {
     }
   };
 
-  const checkForCorrectWord = (wordInput, desiredWord) => {
-    let formattedWordInput = wordInput.ToLowerCase();
-    let desiredWordArray = [];
-    desiredWordArray.push(desiredWord.toLowerCase());
+  const removeAnyPunctuation = (word) => {
+    const ignore = [".", ",", "!", "?", "/"];
+    let newWord = "";
+    for (let i = 0; i < word.length; i++) {
+      if (!ignore.includes(word[i])) {
+        newWord += word[i];
+      }
+    }
+    console.log(newWord);
+    return newWord;
+  };
 
-    if (wordInput == exerciseWords[wordToLearn].portuguese) {
+  const checkForCorrectWord = (wordInput, desiredWord) => {
+    let formattedWordInput = wordInput.toLowerCase();
+    formattedWordInput = removeAnyPunctuation(formattedWordInput);
+    let desiredWordArray = [];
+    desiredWordArray.push(removeAnyPunctuation(desiredWord.toLowerCase()));
+
+    if (formattedWordInput == desiredWordArray[0]) {
       return true;
     } else {
       return false;
@@ -99,7 +112,7 @@ const WritingExercise = (props) => {
   };
 
   const updateWordInformation = () => {
-    if (wordInput == exerciseWords[wordToLearn].portuguese) {
+    if (checkForCorrectWord(wordInput, exerciseWords[wordToLearn].portuguese)) {
       setCorrect(correct + 1);
       updateLastFiveArray(true);
     } else {
@@ -165,7 +178,7 @@ const WritingExercise = (props) => {
   };
 
   const displayCorrect = () => {
-    if (wordInput == exerciseWords[wordToLearn].portuguese) {
+    if (checkForCorrectWord(wordInput, exerciseWords[wordToLearn].portuguese)) {
       setIsCorrect(true);
     } else {
       setIsIncorrect(true);
