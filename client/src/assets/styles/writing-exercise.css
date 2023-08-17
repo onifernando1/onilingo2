@@ -73,11 +73,12 @@
   border-top: 2px solid black;
   border-left: 2px solid black;
   transform: rotate(315deg);
-  margin-right: 82px;
+  margin-right: 100px;
 }
 
 .test-word {
   border: 2px solid black;
+  padding: 0.5rem;
 }
 
 .word-input {
