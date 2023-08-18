@@ -1,0 +1,50 @@
+import "../assets/styles/feed.css";
+
+const Feed = () => {
+  return (
+    <div className="feed-container">
+      <div className="super-container">
+        <div className="super-left">
+          <div>
+            <img
+              className="super-title"
+              src={require("../assets/images/super.jpg")}
+            ></img>
+          </div>
+          <div>
+            <strong>Try Super for free</strong>
+          </div>
+          <div className="super-info">
+            No ads, personalized practice, and unlimited Legendary!
+          </div>
+          <button className="super-button">FREE</button>
+        </div>
+        <div>
+          <img
+            className="double-duo"
+            src={require("../assets/images/doubleDuo.jpg")}
+          ></img>
+        </div>
+      </div>
+      <div>
+        <div>Sapphire image</div>
+        <div>Sapphire League</div>
+        <div>You're ranked #3</div>
+        <div>VIEW LEAGUE</div>
+        <div>Keep it up to stay in the top 3!</div>
+      </div>
+      <div>
+        <div>Daily Quests</div>
+        <div>VIEW ALL</div>
+        <div>Earn 20 XP</div>
+        <div>zigzag image</div>
+        <div>
+          <div>20/20</div>
+          <div>Trasure image</div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Feed;

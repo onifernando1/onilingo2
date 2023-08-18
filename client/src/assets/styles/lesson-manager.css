@@ -124,9 +124,9 @@ a {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 50rem;
 }
 
 .evil-duo.manager {
-  position: absolute;
-  right: 35%;
+  margin-left: 20rem;
 }

@@ -1,6 +1,7 @@
 import Navbar from "../components/Navbar";
 import LessonManager from "../components/LessonManager";
 import "../assets/styles/home.css";
+import Feed from "../components/Feed";
 
 const Home = () => {
   return (
@@ -11,7 +12,9 @@ const Home = () => {
       <div>
         <LessonManager />
       </div>
-      <div></div>
+      <div>
+        <Feed />
+      </div>
     </div>
   );
 };
