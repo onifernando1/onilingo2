@@ -1,0 +1,16 @@
+.navbar-image {
+  height: 3rem;
+  width: 3rem;
+}
+
+.navbar-section-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo {
+  color: rgb(88, 204, 2);
+  font-size: 1.8rem;
+  font-weight: bold;
+}

@@ -55,7 +55,7 @@ const WritingExercise = (props) => {
   const [initialRender, setInitialRender] = useState(true);
   const [isCorrect, setIsCorrect] = useState(false);
   const [isIncorrect, setIsIncorrect] = useState(false);
-  const [lessonComplete, setLessonComplete] = useState(true);
+  const [lessonComplete, setLessonComplete] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
