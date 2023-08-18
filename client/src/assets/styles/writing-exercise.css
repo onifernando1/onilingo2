@@ -138,3 +138,50 @@
   font-weight: bold;
   font-size: 1.2rem;
 }
+
+.lesson-complete-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 2rem;
+}
+
+.complete-title {
+  font-size: 1.3rem;
+  color: rgb(88, 204, 2);
+  font-weight: bold;
+}
+
+.correct-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1rem;
+  width: 6rem;
+  padding: 1rem;
+  border: 2px solid rgb(88, 204, 2);
+  color: rgb(88, 204, 2);
+  border-radius: 20px;
+}
+
+.incorrect-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1rem;
+  width: 6rem;
+  padding: 1rem;
+  border: 2px solid red;
+  color: red;
+  border-radius: 20px;
+}
+
+.incorrect-correct-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}

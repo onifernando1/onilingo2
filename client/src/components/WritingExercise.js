@@ -55,7 +55,7 @@ const WritingExercise = (props) => {
   const [initialRender, setInitialRender] = useState(true);
   const [isCorrect, setIsCorrect] = useState(false);
   const [isIncorrect, setIsIncorrect] = useState(false);
-  const [lessonComplete, setLessonComplete] = useState(false);
+  const [lessonComplete, setLessonComplete] = useState(true);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -308,10 +308,15 @@ const WritingExercise = (props) => {
           </div>
         </>
       ) : (
-        <div>
-          <div>Lesson Complete!</div>
-          <div>Correct: {correct}</div>
-          <div>Incorrect:{incorrect}</div>
+        <div className="lesson-complete-container">
+          <div className="complete-title">Lesson Complete!</div>
+          <div>
+            <img src={require("../assets/images/duoKnife.jpg")}></img>
+          </div>
+          <div className="incorrect-correct-container">
+            <div className="correct-container">Correct: {correct}</div>
+            <div className="incorrect-container">Incorrect:{incorrect}</div>
+          </div>
         </div>
       )}
     </>
