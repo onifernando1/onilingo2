@@ -46,3 +46,29 @@
   flex-direction: column;
   gap: 0.5rem;
 }
+
+.league-container {
+  border: 2px solid rgb(207, 206, 206);
+  width: 20rem;
+  height: 10rem;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  flex-direction: column;
+}
+
+.league-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.league-body-container {
+  display: flex;
+}
+
+.sapphire {
+  height: 4rem;
+}

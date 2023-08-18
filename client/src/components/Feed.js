@@ -26,11 +26,25 @@ const Feed = () => {
           ></img>
         </div>
       </div>
-      <div>
-        <div>Sapphire image</div>
-        <div>Sapphire League</div>
-        <div>You're ranked #3</div>
-        <div>VIEW LEAGUE</div>
+      <div className="league-container">
+        <div className="league-title">
+          <div>
+            <strong>Sapphire League</strong>
+          </div>
+          <div>VIEW LEAGUE</div>
+        </div>
+        <div className="league-body-container">
+          <div>
+            <img
+              className="sapphire"
+              src={require("../assets/images/sapphire.jpg")}
+            ></img>
+          </div>
+          <div>
+            <strong>You're ranked #3</strong>
+          </div>
+        </div>
+
         <div>Keep it up to stay in the top 3!</div>
       </div>
       <div>
