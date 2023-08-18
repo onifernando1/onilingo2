@@ -185,3 +185,15 @@
   align-items: center;
   gap: 2rem;
 }
+
+.next {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1rem;
+  width: 6rem;
+  padding: 1rem;
+  border: 2px solid blue;
+  color: blue;
+  border-radius: 20px;
+}

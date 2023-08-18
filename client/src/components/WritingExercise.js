@@ -316,6 +316,9 @@ const WritingExercise = (props) => {
           <div className="incorrect-correct-container">
             <div className="correct-container">Correct: {correct}</div>
             <div className="incorrect-container">Incorrect:{incorrect}</div>
+            <Link to="/">
+              <div className="next">Home</div>
+            </Link>
           </div>
         </div>
       )}
