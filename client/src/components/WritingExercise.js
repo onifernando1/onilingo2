@@ -6,41 +6,41 @@ import "../assets/styles/body.css";
 import { Link } from "react-router-dom";
 
 const WritingExercise = (props) => {
-  // const exerciseWords = props.words;
-  const [exerciseWords, setExerciseWords] = useState([
-    {
-      id: 34,
-      english: "hi",
-      portuguese: "olá",
-      times_seen: 0,
-      times_wrong: 0,
-      status: "learning",
-      last_studied_date: null,
-      to_be_studied_date: null,
-      percentage: 0,
-      last_five_array: [],
-      last_five_percentage: 0,
-      image: null,
-      sound: null,
-      lesson_id: 1,
-    },
-    {
-      id: 35,
-      english: "what's up?",
-      portuguese: "e então?",
-      times_seen: 0,
-      times_wrong: 0,
-      status: "learning",
-      last_studied_date: null,
-      to_be_studied_date: null,
-      percentage: 0,
-      last_five_array: [],
-      last_five_percentage: 0,
-      image: null,
-      sound: null,
-      lesson_id: 1,
-    },
-  ]);
+  const [exerciseWords, setExerciseWords] = useState(props.words);
+  // const [exerciseWords, setExerciseWords] = useState([
+  //   {
+  //     id: 34,
+  //     english: "hi",
+  //     portuguese: "olá",
+  //     times_seen: 0,
+  //     times_wrong: 0,
+  //     status: "learning",
+  //     last_studied_date: null,
+  //     to_be_studied_date: null,
+  //     percentage: 0,
+  //     last_five_array: [],
+  //     last_five_percentage: 0,
+  //     image: null,
+  //     sound: null,
+  //     lesson_id: 1,
+  //   },
+  //   {
+  //     id: 35,
+  //     english: "what's up?",
+  //     portuguese: "e então?",
+  //     times_seen: 0,
+  //     times_wrong: 0,
+  //     status: "learning",
+  //     last_studied_date: null,
+  //     to_be_studied_date: null,
+  //     percentage: 0,
+  //     last_five_array: [],
+  //     last_five_percentage: 0,
+  //     image: null,
+  //     sound: null,
+  //     lesson_id: 1,
+  //   },
+  // ]);
   const [wordToLearn, setWordToLearn] = useState(props.currentWordToLearn);
   const [wordInput, setWordInput] = useState("");
   const changeCurrentWordToLearn = props.changeCurrentWordToLearn;
@@ -79,6 +79,7 @@ const WritingExercise = (props) => {
       alert("done");
       setLessonComplete(true);
       updateWordDataForBackend();
+      updateWordsAxios();
     } else if (wordToLearn < exerciseWords.length - 1) {
       setWordToLearn(wordToLearn + 1);
     } else if (wordToLearn >= exerciseWords.length - 1) {
@@ -194,6 +195,30 @@ const WritingExercise = (props) => {
     }
     updateWordInformation();
     setExercisesLeft(exercisesLeft - 1);
+  };
+
+  const updateWordsAxios = () => {
+    console.log("called");
+    exerciseWords.forEach((word) => {
+      console.log(word.times_seen);
+      axios
+        .put(`http://localhost:3000/words/${word.id}`, {
+          timesSeen: word.times_seen,
+          timesWrong: word.times_wrong,
+          status: word.status,
+          lastStudiedDate: word.last_studied_date,
+          toBeStudiedDate: word.to_be_studied_date,
+          percentage: word.percentage,
+          lastFiveArray: word.last_five_array,
+          lastFivePercentage: word.last_five_percentage,
+        })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    });
   };
 
   return (

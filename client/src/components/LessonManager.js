@@ -20,7 +20,7 @@ const LessonManager = (props) => {
           <div className="circle-container">
             <div className="outer-grey"></div>
             <div className="outer-white"></div>
-            <div className="circle">Star</div>
+            <div className="circle">1</div>
           </div>
         </Link>
       </div>
