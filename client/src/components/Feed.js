@@ -31,7 +31,7 @@ const Feed = () => {
           <div>
             <strong>Sapphire League</strong>
           </div>
-          <div>VIEW LEAGUE</div>
+          <div className="view-league">VIEW LEAGUE</div>
         </div>
         <div className="league-body-container">
           <div>
@@ -41,11 +41,12 @@ const Feed = () => {
             ></img>
           </div>
           <div>
-            <strong>You're ranked #3</strong>
+            <div>
+              <strong>You're ranked #3</strong>
+            </div>
+            <div className="ranked-quote">Keep it up to stay in the top 3!</div>
           </div>
         </div>
-
-        <div>Keep it up to stay in the top 3!</div>
       </div>
       <div>
         <div>Daily Quests</div>

@@ -50,25 +50,38 @@
 .league-container {
   border: 2px solid rgb(207, 206, 206);
   width: 20rem;
-  height: 10rem;
+  height: 8rem;
   padding: 1rem;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   border-radius: 15px;
   flex-direction: column;
+  gap: 2rem;
 }
 
 .league-title {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 4rem;
 }
 
 .league-body-container {
   display: flex;
+  gap: 1rem;
 }
 
 .sapphire {
   height: 4rem;
+}
+
+.ranked-quote {
+  color: grey;
+  font-weight: bold;
+}
+
+.view-league {
+  color: rgb(0, 153, 255);
+  font-weight: bold;
 }
