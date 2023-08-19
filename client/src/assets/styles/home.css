@@ -1,4 +1,5 @@
 .home-container {
   display: flex;
   gap: 5rem;
+  padding: 2rem;
 }

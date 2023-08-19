@@ -1,3 +1,10 @@
+.navbar-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%;
+}
+
 .navbar-image {
   height: 3rem;
   width: 3rem;
@@ -13,4 +20,17 @@
   color: rgb(88, 204, 2);
   font-size: 1.8rem;
   font-weight: bold;
+}
+
+.active {
+  background-color: rgb(221, 244, 255);
+  border: 1px solid rgb(0, 191, 255);
+  border-radius: 10px;
+  color: rgb(0, 128, 255);
+  font-weight: bold;
+}
+
+.navbar-title {
+  font-weight: bold;
+  color: rgb(119, 119, 119);
 }
