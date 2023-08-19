@@ -48,14 +48,74 @@ const Feed = () => {
           </div>
         </div>
       </div>
-      <div>
-        <div>Daily Quests</div>
-        <div>VIEW ALL</div>
-        <div>Earn 20 XP</div>
-        <div>zigzag image</div>
-        <div>
-          <div>20/20</div>
-          <div>Trasure image</div>
+      <div className="daily-quests-container">
+        <div className="quest-title">
+          <div>
+            <strong>Daily Quests</strong>
+          </div>
+          <div className="view-all">VIEW ALL</div>
+        </div>
+        <div className="individual-quest-container">
+          <div>
+            <img
+              className="quest-image"
+              src={require("../assets/images/zigzag.jpg")}
+            ></img>
+          </div>
+          <div>
+            <div className="quest-text">Earn 30 XP</div>
+            <div className="bar-container">
+              <div className="quest-progress-bar">30/30 </div>
+              <div>
+                <img
+                  className="treasure"
+                  src={require("../assets/images/chest.jpg")}
+                ></img>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="individual-quest-container">
+          <div>
+            <img
+              className="quest-image"
+              src={require("../assets/images/target.jpg")}
+            ></img>
+          </div>
+          <div>
+            <div className="quest-text">Score 80% or higher in 4 lessons</div>
+            <div className="bar-container">
+              <div className="quest-progress-bar">4/4</div>
+              <div>
+                <img
+                  className="treasure"
+                  src={require("../assets/images/chest.jpg")}
+                ></img>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="individual-quest-container">
+          <div>
+            <img
+              className="quest-image"
+              src={require("../assets/images/quest-duo.jpg")}
+            ></img>
+          </div>
+          <div>
+            <div className="quest-text">
+              Get 10 in a row correct in 3 lessons
+            </div>
+            <div className="bar-container">
+              <div className="quest-progress-bar">3/3 </div>
+              <div>
+                <img
+                  className="treasure"
+                  src={require("../assets/images/chest.jpg")}
+                ></img>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
