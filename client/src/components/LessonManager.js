@@ -1,7 +1,18 @@
 import { Link } from "react-router-dom";
 import "../assets/styles/lesson-manager.css";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 const LessonManager = (props) => {
+  const [lessons, setLessons] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:3000/lessons/1").then((response) => {
+      console.log(response.data);
+      setLessons(response.data.lesson);
+    });
+  }, []);
+
   return (
     <div className="lessons-container">
       <div className="unit-container">
