@@ -2,8 +2,10 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import WritingExercise from "./WritingExercise";
+import { useParams } from "react-router-dom";
 
 const Lesson = (props) => {
+  const { id } = useParams();
   const [words, setWords] = useState("");
   const [currentWordToLearn, setCurrentWordToLearn] = useState(0);
   const changeCurrentWordToLearn = (exerciseResponse) => {
@@ -14,7 +16,7 @@ const Lesson = (props) => {
   };
 
   useEffect(() => {
-    axios.get("http://localhost:3000/lessons/2").then((response) => {
+    axios.get(`http://localhost:3000/lessons/${id}`).then((response) => {
       setWords(response.data.words);
       console.log(response.data);
     });

@@ -29,7 +29,11 @@ const LessonManager = (props) => {
           {lessons.map((lesson) => {
             return (
               <div className="lesson-circle-container">
-                <Link className="individual-lesson" to="lesson" key={lesson.id}>
+                <Link
+                  className="individual-lesson"
+                  to={`lesson/${lesson.id}`}
+                  key={lesson.id}
+                >
                   <div className="start">START</div>
                   <div className="circle-container">
                     <div className="outer-grey"></div>
