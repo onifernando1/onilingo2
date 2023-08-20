@@ -14,7 +14,7 @@ const Lesson = (props) => {
   };
 
   useEffect(() => {
-    axios.get("http://localhost:3000/lessons/1").then((response) => {
+    axios.get("http://localhost:3000/lessons/2").then((response) => {
       setWords(response.data.words);
       console.log(response.data);
     });

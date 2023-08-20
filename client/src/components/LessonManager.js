@@ -7,9 +7,9 @@ const LessonManager = (props) => {
   const [lessons, setLessons] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/lessons/1").then((response) => {
+    axios.get("http://localhost:3000/lessons").then((response) => {
       console.log(response.data);
-      setLessons(response.data.lesson);
+      setLessons(response.data);
     });
   }, []);
 
@@ -24,16 +24,26 @@ const LessonManager = (props) => {
           <div>GUIDEBOOK</div>
         </div>
       </div>
-      <div className="lesson-circle-container">
-        <Link to="lesson">
-          <div className="start">START</div>
-          <div className="circle-container">
-            <div className="outer-grey"></div>
-            <div className="outer-white"></div>
-            <div className="circle">1</div>
-          </div>
-        </Link>
-      </div>
+      {lessons ? (
+        <div className="individual-lesson-circles-container">
+          {lessons.map((lesson) => {
+            return (
+              <div className="lesson-circle-container">
+                <Link className="individual-lesson" to="lesson" key={lesson.id}>
+                  <div className="start">START</div>
+                  <div className="circle-container">
+                    <div className="outer-grey"></div>
+                    <div className="outer-white"></div>
+                    <div className="circle">{lesson.number}</div>
+                  </div>
+                </Link>
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        <>Null</>
+      )}
       <div>
         <img
           className="evil-duo manager"

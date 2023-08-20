@@ -118,7 +118,7 @@ a {
 
 .lesson-circle-container {
   display: flex;
-  margin-top: 5rem;
+  margin-top: 4rem;
 }
 
 .lessons-container {
@@ -130,9 +130,31 @@ a {
 }
 
 .evil-duo.manager {
-  margin-left: 20rem;
+  position: absolute;
+  top: 30rem;
+  left: 30rem;
 }
 
 .star {
   height: 2rem;
+}
+
+.lesson-circle-container:nth-child(1) {
+  margin-left: 5rem;
+}
+
+.lesson-circle-container:nth-child(2) {
+  margin-left: 8rem;
+}
+
+.lesson-circle-container:nth-child(3) {
+  margin-left: 11rem;
+}
+
+.lesson-circle-container:nth-child(4) {
+  margin-left: 8rem;
+}
+
+.lesson-circle-container:nth-child(5) {
+  margin-left: 5rem;
 }
