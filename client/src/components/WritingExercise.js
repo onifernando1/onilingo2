@@ -7,40 +7,6 @@ import { Link } from "react-router-dom";
 
 const WritingExercise = (props) => {
   const [exerciseWords, setExerciseWords] = useState(props.words);
-  // const [exerciseWords, setExerciseWords] = useState([
-  //   {
-  //     id: 34,
-  //     english: "hi",
-  //     portuguese: "olá",
-  //     times_seen: 0,
-  //     times_wrong: 0,
-  //     status: "learning",
-  //     last_studied_date: null,
-  //     to_be_studied_date: null,
-  //     percentage: 0,
-  //     last_five_array: [],
-  //     last_five_percentage: 0,
-  //     image: null,
-  //     sound: null,
-  //     lesson_id: 1,
-  //   },
-  //   {
-  //     id: 35,
-  //     english: "what's up?",
-  //     portuguese: "e então?",
-  //     times_seen: 0,
-  //     times_wrong: 0,
-  //     status: "learning",
-  //     last_studied_date: null,
-  //     to_be_studied_date: null,
-  //     percentage: 0,
-  //     last_five_array: [],
-  //     last_five_percentage: 0,
-  //     image: null,
-  //     sound: null,
-  //     lesson_id: 1,
-  //   },
-  // ]);
   const [wordToLearn, setWordToLearn] = useState(props.currentWordToLearn);
   const [wordInput, setWordInput] = useState("");
   const changeCurrentWordToLearn = props.changeCurrentWordToLearn;
@@ -211,6 +177,11 @@ const WritingExercise = (props) => {
           percentage: word.percentage,
           lastFiveArray: word.last_five_array,
           lastFivePercentage: word.last_five_percentage,
+          lessonId: word.lesson_id,
+          sound: word.sound,
+          image: word.image,
+          english: word.english,
+          portuguese: word.portuguese,
         })
         .then((response) => {
           console.log(response);

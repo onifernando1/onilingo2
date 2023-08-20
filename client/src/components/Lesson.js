@@ -20,34 +20,8 @@ const Lesson = (props) => {
     });
   }, []);
 
-  // useEffect(() => {
-  //   if (words) {
-  //     words.forEach((word) => {
-  //       axios
-  //         .post(`http://localhost:3000/words/${word.id}`, {
-  //           timesSeen: word.timesSeen,
-  //           timesWrong: word.timesWrong,
-  //           status: word.status,
-  //           lastStudiedDate: word.lastStudiedDate,
-  //           toBeStudiedDate: word.toBeStudiedDate,
-  //           percentage: word.percentage,
-  //           lastFiveArray: word.lastFiveArray,
-  //           lastFivePercentage: word.lastFivePercentage,
-  //         })
-  //         .then((response) => {
-  //           console.log(response);
-  //         })
-  //         .catch((error) => {
-  //           console.log(error);
-  //         });
-  //     });
-  //   }
-  // }, [words]);
-
   return (
     <div>
-      {/* <div>Test</div>
-      <div>TEST WORD TO LEARN {currentWordToLearn}</div> */}
       {words.length >= 1 ? (
         <div>
           <WritingExercise

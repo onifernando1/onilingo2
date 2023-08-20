@@ -3,11 +3,11 @@ const pool = require("../queries");
 //Create
 
 exports.create = (req, res) => {
-  const { name, number } = req.body;
+  const { name, number, timesCompleted } = req.body;
 
   pool.query(
-    "INSERT INTO lessons (name,number) VALUES ($1,$2)",
-    [name, number],
+    "INSERT INTO lessons (name,number,times_completed) VALUES ($1,$2,$3)",
+    [name, number, timesCompleted],
 
     (error, results) => {
       if (error) {
@@ -57,11 +57,11 @@ exports.findOne = async (req, res) => {
 exports.update = (req, res) => {
   const id = req.params.id;
 
-  const { name, number } = req.body;
+  const { name, number, timesCompleted } = req.body;
 
   pool.query(
-    "UPDATE lessons SET name =$1 ,number = $2 WHERE id=$3",
-    [name, number, id],
+    "UPDATE lessons SET name =$1 ,number = $2, times_completed=$3 WHERE id=$4",
+    [name, number, timesCompleted, id],
     (error, results) => {
       if (error) {
         throw error;

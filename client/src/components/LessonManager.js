@@ -10,7 +10,6 @@ const LessonManager = (props) => {
           <div>Form basic sentences, great people</div>
         </div>
         <div className="guidebook-container">
-          {/* <div>Guidebook image</div> */}
           <div>GUIDEBOOK</div>
         </div>
       </div>
