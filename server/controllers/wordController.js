@@ -157,6 +157,24 @@ exports.delete = (req, res) => {
   });
 };
 
-//Delete All
+function formatDateToYYYYMMDD(date) {
+  return new Intl.DateTimeFormat("en-GB", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(date);
+}
 
-exports.deleteAll = (req, res) => {};
+//Find words to review
+exports.review = (req, res) => {
+  const currentDate = formatDateToYYYYMMDD(new Date());
+  pool
+    .query("SELECT * FROM words WHERE last_studied_date <= $1", [currentDate])
+    .then((result) => {
+      res.status(200).json(result.rows);
+    })
+    .catch((error) => {
+      console.error("Error", error);
+      res.status(500).json({ error: "internal server error" });
+    });
+};

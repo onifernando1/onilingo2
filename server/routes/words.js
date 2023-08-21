@@ -3,6 +3,8 @@ const router = require("express").Router();
 
 router.get("/findMany", words.findMany);
 
+router.get("/review", words.review);
+
 router.post("/", words.create);
 
 router.get("/", words.findAll);

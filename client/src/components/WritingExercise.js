@@ -29,6 +29,21 @@ const WritingExercise = (props) => {
     setWordInput("");
   };
 
+  const calculateReviewDate = (lastFivePercent) => {
+    let daysToAdd = {
+      0: 0,
+      20: 2,
+      40: 3,
+      60: 5,
+      80: 7,
+      100: 10,
+    };
+    const date = new Date();
+    console.log(daysToAdd[lastFivePercent]);
+    date.setDate(date.getDate() + daysToAdd[lastFivePercent]);
+    return date;
+  };
+
   const updateLastFiveArray = (bool) => {
     let tempArray = [...exerciseWords];
     if (exerciseWords[wordToLearn].last_five_array.length < 5) {
@@ -39,6 +54,14 @@ const WritingExercise = (props) => {
       setExerciseWords(tempArray);
     }
   };
+
+  function formatDateToYYYYMMDD(date) {
+    return new Intl.DateTimeFormat("en-GB", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }).format(date);
+  }
 
   const moveToNextExercise = () => {
     if (exercisesLeft <= 0) {
@@ -61,7 +84,6 @@ const WritingExercise = (props) => {
         newWord += word[i];
       }
     }
-    console.log(newWord);
     return newWord;
   };
 
@@ -94,9 +116,11 @@ const WritingExercise = (props) => {
 
     tempArray[wordToLearn].times_seen++;
 
-    setExerciseWords(tempArray);
+    tempArray[wordToLearn].to_be_studied_date = calculateReviewDate(
+      tempArray.last_five_percentage
+    );
 
-    console.log(exerciseWords[wordToLearn]);
+    setExerciseWords(tempArray);
 
     moveToNextExercise();
 
@@ -112,7 +136,6 @@ const WritingExercise = (props) => {
   };
 
   const updateLastFivePercentage = () => {
-    console.log("called");
     let correct = 0;
     let incorrect = 0;
     let tempArray = [...exerciseWords];
@@ -131,8 +154,8 @@ const WritingExercise = (props) => {
 
   const updateLastStudiedDate = () => {
     let tempArray = [...exerciseWords];
-    tempArray[wordToLearn].last_studied_date =
-      new Date().toLocaleDateString() + "";
+    console.log(formatDateToYYYYMMDD(new Date()));
+    tempArray[wordToLearn].last_studied_date = formatDateToYYYYMMDD(new Date());
     setExerciseWords(tempArray);
   };
 
@@ -140,7 +163,7 @@ const WritingExercise = (props) => {
     updatePercentage();
     updateLastFivePercentage();
     updateLastStudiedDate();
-    console.log(exerciseWords);
+    updateToStudyDate();
     updateWords(exerciseWords);
   };
 
@@ -164,9 +187,7 @@ const WritingExercise = (props) => {
   };
 
   const updateWordsAxios = () => {
-    console.log("called");
     exerciseWords.forEach((word) => {
-      console.log(word.times_seen);
       axios
         .put(`http://localhost:3000/words/${word.id}`, {
           timesSeen: word.times_seen,
